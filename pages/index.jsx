@@ -24,8 +24,9 @@ const Home = () => {
         </link>
       </Head>
 
-
-      <HomePage />
+      <div>
+        <HomePage />
+      </div>
       {/* <main className={styles.main}>
         <ConnectButton />
 

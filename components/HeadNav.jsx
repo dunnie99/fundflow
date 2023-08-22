@@ -3,10 +3,10 @@ import Link from "next/link"
 export const HeadNav = () => {
   return (
     <nav
-      className="relative flex w-full items-center justify-between bgCol py-2  md:py-4"
+      className="relative flex w-full items-center justify-between bgCol py-2 md:py-10 sm:px-16 px-6"
       data-te-navbar-ref>
-      <div className="flex w-full justify-between items-center px-3">
-        <div className="ml-2">
+      <div className="flex w-full justify-between items-center">
+        <div className="">
           <Link href="/" className="text-md sm:text-3xl geostar_font uppercase text-[#fefefe]">
             Fundflow
           </Link>

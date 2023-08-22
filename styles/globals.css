@@ -6,8 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Space Mono', monospace;
 }
 
 a {
@@ -29,4 +28,22 @@ a {
 
 .bgCol {
   background: linear-gradient(0deg, rgba(2, 5, 31, 0.93) 0%, rgba(2, 5, 31, 0.93) 100%), linear-gradient(135deg, #80F2BC 4.17%, #CD31D0 44.27%, #1E30D1 83.33%);
+}
+
+.hero_bg {
+  background: linear-gradient(0deg, rgba(2, 5, 31, 0.93) 0%, rgba(2, 5, 31, 0.93) 100%), linear-gradient(135deg, #80F2BC 4.17%, #CD31D0 44.27%, #1E30D1 83.33%);
+}
+
+.fin_bg {
+  background: var(--gradient-effect, linear-gradient(180deg, #0E0E0E 0%, #56AAFE 20.00%, #56AAFE 40.00%, #56AAFE 60.00%, #56AAFE 80.00%, #00020D 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.base_bg {
+  background: linear-gradient(180deg, #B21690 18.75%, #FED956 54.69%, #921085 91.67%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
