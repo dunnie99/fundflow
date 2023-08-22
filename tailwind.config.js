@@ -41,8 +41,6 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    // require("tailwind-scrollbar-hide"),
-    // require("tailwind-scrollbar")({ nocompatible: true }),
-  ],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 };

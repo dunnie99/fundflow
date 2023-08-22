@@ -6,6 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
   font-family: 'Space Mono', monospace;
 }
 
@@ -46,4 +47,19 @@ a {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.class {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0.20) 100%);
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(10px);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

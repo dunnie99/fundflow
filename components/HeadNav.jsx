@@ -3,7 +3,7 @@ import Link from "next/link"
 export const HeadNav = () => {
   return (
     <nav
-      className="relative flex w-full items-center justify-between bgCol py-2 md:py-10 sm:px-16 px-6"
+      className="relative flex w-full items-center justify-between bgCol py-2 sm:py-5 sm:px-16 px-6"
       data-te-navbar-ref>
       <div className="flex w-full justify-between items-center">
         <div className="">
