@@ -1,11 +1,11 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import HomePage from './HomePage.jsx';
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>RainbowKit App</title>
         <meta
@@ -13,9 +13,20 @@ const Home: NextPage = () => {
           name="description"
         />
         <link href="/favicon.ico" rel="icon" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Geostar&family=Space+Grotesk&display=swap" rel="stylesheet"></link>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Geostar&family=Space+Grotesk&family=Space+Mono&display=swap" rel="stylesheet">
+
+        </link>
       </Head>
 
-      <main className={styles.main}>
+
+      <HomePage />
+      {/* <main className={styles.main}>
         <ConnectButton />
 
         <h1 className={styles.title}>
@@ -70,13 +81,13 @@ const Home: NextPage = () => {
             </p>
           </a>
         </div>
-      </main>
+      </main> */}
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
           Made with ❤️ by your frens at 🌈
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 };

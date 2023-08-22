@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -13,4 +17,16 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.geostar_font {
+  font-family: 'Geostar', monospace;
+}
+
+.mono_font {
+  font-family: 'Space Mono', monospace;
+}
+
+.bgCol {
+  background: linear-gradient(0deg, rgba(2, 5, 31, 0.93) 0%, rgba(2, 5, 31, 0.93) 100%), linear-gradient(135deg, #80F2BC 4.17%, #CD31D0 44.27%, #1E30D1 83.33%);
 }
