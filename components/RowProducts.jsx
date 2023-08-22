@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const RowProducts = () => {
   return (
-    <div className="flex scrollbar-hide overflow-x-scroll overflow-y-hidden gap-8 flex-nowrap items-end justify-between my-8 text-[#fefefe] sm:my-10">
+    <div className="flex scrollbar-hide overflow-x-scroll glass_bg sm:bg-transparent overflow-y-hidden gap-8 flex-nowrap items-en justify-between mt-8 text-[#fefefe] sm:mt-10 px-6 sm:px-16 pt-4 sm:pt-0">
       {glasses?.map((card, index) => (
         <div key={index} className="class flex items-center w-full gap-2 rounded-2xl py-3 px-6 min-w-[215px] text-center flex">
           <Image

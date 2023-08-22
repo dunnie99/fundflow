@@ -5,9 +5,9 @@ import RowProducts from "./RowProducts"
 
 const HeroSection = () => {
   return (
-    <div className='hero_bg py-10 sm:py-16 px-6 sm:px-16'>
-      <div className="flex items-start justify-between flex-col md:flex-row">
-        <div className="sm:w-[60%] w-full">
+    <div className='hero_bg py-10 sm:py-16'>
+      <div className="md:flex items-start justify-between px-6 sm:px-16 grid">
+        <div className="md:w-[60%] w-full">
           <h3 className="leading-normal text-center sm:text-start block font-normal tracing-[-0.128px] text-[#CDCFDE] sm:text-[64px] text-[48px]">
             Unlocking <span className='fin_bg'>Financial Inclusion</span> <span>with</span> <span className="base_bg">Base</span>
           </h3>
@@ -15,7 +15,7 @@ const HeroSection = () => {
             Welcome to a new era of financial inclusion powered by Coinbase. Say goodbye to traditional barriers and hello to a borderless, secure, and empowering financial experience.
           </span>
         </div>
-        <div className="sm:w-[35%] w-full sm:mt-0 my-10 flex justify-end">
+        <div className="md:w-[40%] w-full md:mt-0 mt-10 flex md:justify-end">
           <Image
             src={hero}
             alt="hero_img"

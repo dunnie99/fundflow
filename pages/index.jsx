@@ -16,6 +16,11 @@ const Home = () => {
           type="text/javascript"
           src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Geostar&family=Space+Grotesk&family=Space+Mono&display=swap" rel="stylesheet">
+
+        </link>
         <link href="/favicon.ico" rel="icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
