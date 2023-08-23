@@ -7,6 +7,7 @@ export const glasses = [
 export const app_cards = [
   {
     name: "Aave V2",
+    href: "aave",
     content: "An optimized gateway to Aave V2 with the same liquidity and risk parameters",
     innerCard: [
       {
@@ -21,6 +22,7 @@ export const app_cards = [
   },
   {
     name: "BaseSwap",
+    href: "baseswap",
     content: "An optimized gateway to BaseSwap with the same liquidity and risk parameters",
     innerCard: [
       {
@@ -35,6 +37,7 @@ export const app_cards = [
   },
   {
     name: "Uniswap",
+    href: "uniswap",
     content: "An optimized gateway to Uniswap with the same liquidity and risk parameters",
     innerCard: [
       {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { app_cards, flowCards } from '../utils/constants';
 import FlowCard from "./Flow";
+import Link from 'next/link';
 
 const AppCard = () => {
   return (
@@ -18,7 +19,9 @@ const AppCard = () => {
                 </div>
               ))}
             </div>
-            <button className='bg-[#CDCFDE] inline-fle py-4 px-9 rounded-2xl justify-center mx-auto text-black' >Lunch App</button>
+            <Link href={`/app?source=${card?.href}`}>
+              <button className='bg-[#CDCFDE] inline-fle py-4 px-9 rounded-2xl justify-center mx-auto text-black' >Lunch App</button>
+            </Link>
           </div>
         ))}
       </div>
