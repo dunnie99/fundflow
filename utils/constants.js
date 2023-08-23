@@ -1,3 +1,5 @@
+import { anchorage, avalanche, bitgo, coinbase, ether_flow, ledger } from "../assets"
+
 export const glasses = [
   "Ethereum", "Polygon", "Avalanche", "Coinbase", "Arbitrum", "Optimism",
 ]
@@ -45,4 +47,37 @@ export const app_cards = [
       }
     ]
   }
+]
+
+export const flowCards = [
+  {
+    title: "Coinbase",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: coinbase
+  },
+  {
+    title: "Avalanche",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: avalanche
+  },
+  {
+    title: "Ethereum",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: ether_flow
+  },
+  {
+    title: "Ledger",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: ledger
+  },
+  {
+    title: "Bitgo",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: bitgo
+  },
+  {
+    title: "Anchorage",
+    content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
+    image: anchorage
+  },
 ]

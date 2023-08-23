@@ -79,7 +79,7 @@ export const HeadNav = () => {
         </div>
 
         <Link
-          href="#"
+          href="#apps"
           className="!visible mt-2 hidden bg-[#CDCFDE] py-4 px-9 rounded-2xl flex-gro basis-[100%] items-center md:mt-0 md:!flex md:basis-auto"
           id="navbarSupportedContent3"
           data-te-collapse-item>
