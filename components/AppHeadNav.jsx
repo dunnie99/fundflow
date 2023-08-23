@@ -1,7 +1,11 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
+import { useContext } from "react"
+import { GlobalContext } from "../context/GlobalContext"
 
 export const AppHeadNav = () => {
+  const { state, dispatch } = useContext(GlobalContext)
+
   return (
     <nav
       className="relative flex w-full items-center justify-between bg-[#CDCFDE] py-2 sm:py-5 sm:px-16 px-6"
@@ -92,6 +96,15 @@ export const AppHeadNav = () => {
               const connected =
                 ready &&
                 account &&
+                dispatch({
+                  type: "SET_CONNECTED",
+                  payload: true,
+                }) &&
+                dispatch({
+                  type: "SET_BALANCE",
+                  payload: account.displayBalance,
+                })
+                &&
                 chain &&
                 (!authenticationStatus ||
                   authenticationStatus === 'authenticated');

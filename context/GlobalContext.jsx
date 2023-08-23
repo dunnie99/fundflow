@@ -3,23 +3,27 @@ export const GlobalContext = createContext();
 
 const initialState = {
   address: null,
-  token: null,
+  connected: null,
+  balanceETH: "",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_ADDRESS":
+    case "SET_BALANCE":
       if (action.payload !== null) {
-        localStorage.setItem("address", action.payload);
+        localStorage.setItem("balanceETH", action.payload);
       }
       return {
         ...state,
-        address: localStorage.getItem("address") ?? null,
+        balanceETH: localStorage.getItem("balanceETH") ?? "",
       };
-    case "SET_TOKEN":
+    case "SET_CONNECTED":
+      if (action.payload !== null) {
+        localStorage.setItem("connected", action.payload);
+      }
       return {
         ...state,
-        token: localStorage.getItem("openlogin_store"),
+        token: localStorage.getItem("connected"),
       };
     default:
       return state;
