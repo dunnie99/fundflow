@@ -27,7 +27,7 @@ export const AppHeadNav = () => {
                 <Link
                   className="md:px-2 "
                   aria-current="page"
-                  href="/governance"
+                  href="/markets"
                   data-te-nav-link-ref
                 >Markets</Link >
               </div>
@@ -37,7 +37,7 @@ export const AppHeadNav = () => {
                 data-te-nav-item-ref>
                 <Link
                   className="p-0 transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
-                  href="/docs"
+                  href="/swap"
                   data-te-nav-link-ref
                 >Swap</Link>
               </div>
@@ -69,7 +69,7 @@ export const AppHeadNav = () => {
         </button>
 
         <div className="flex bg- items-center text-black gap-5">
-          <select data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-[100px]">
+          <select data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-fit">
             <option value="1">Aave</option>
             <option value="2">Uniswap</option>
             <option value="3">Baseswap</option>
@@ -138,7 +138,7 @@ export const AppHeadNav = () => {
                       );
                     }
                     return (
-                      <div style={{ display: 'flex', gap: 12 }}>
+                      <div style={{ display: 'flex', gap: 12 }} className="border rounded-2xl p-4">
                         <button
                           onClick={openChainModal}
                           style={{ display: 'flex', alignItems: 'center' }}

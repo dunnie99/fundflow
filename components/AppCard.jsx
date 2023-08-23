@@ -20,7 +20,7 @@ const AppCard = () => {
               ))}
             </div>
             <Link href={`/app?source=${card?.href}`}>
-              <button className='bg-[#CDCFDE] inline-fle py-4 px-9 rounded-2xl justify-center mx-auto text-black' >Lunch App</button>
+              <button className='bg-[#CDCFDE] inline-fle py-4 px-9 rounded-2xl justify-center mx-auto text-black' >Launch App</button>
             </Link>
           </div>
         ))}
@@ -32,7 +32,7 @@ const AppCard = () => {
             FundFlow Market
           </h3>
           <span className="text-base sm:text-2xl sm:text-start text-center mt-5 sm:mt-4 text-[#CDCFDE] tracking-[0.08px] max-w-[640px] block">
-            Integrated interfaces created by the community for the protocol      </span>
+            Integrated interfaces created by the community for the protocol</span>
         </div>
 
         <div className="flex scrollbar-hide overflow-x-scroll overflow-y-hidden gap-8 flex-nowrap items-center w-full mt-6 sm:mt-0">

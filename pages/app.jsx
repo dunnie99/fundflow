@@ -1,11 +1,13 @@
 import React from 'react'
 import { AppHeadNav } from '../components/AppHeadNav'
+import GlobalProvider from '../context/GlobalContext'
 
 const App = () => {
   return (
     <div>
-      <AppHeadNav />
-
+      <GlobalProvider>
+        <AppHeadNav />
+      </GlobalProvider>
     </div>
   )
 }
