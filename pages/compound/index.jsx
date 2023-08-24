@@ -9,8 +9,7 @@ import { AppHeadNav } from "../../components/AppHeadNav"
 
 const Compound = () => {
   const [open, setOpen] = useState(false)
-const Compound = () => {
-  const [open, setOpen] = useState(false)
+
   return (
     <Layout>
         <AppHeadNav/>

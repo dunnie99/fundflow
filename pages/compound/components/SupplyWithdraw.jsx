@@ -1,8 +1,35 @@
 import Image from 'next/image'
 import { ethereum } from '../../../assets'
-
+import childABI from '../../../constant/childABI.json'
+import { useState } from 'react';
 
 export default function SupplyWithdraw() {
+
+  const fName ="deposit"
+  
+  const [addr, setAddr]=useState("");
+  const [amt, setAmt]=useState();
+  
+  const arguement = [addr, amt];
+  // const {cwriteData,cwriteLoading,cwriteWrite , data, isError, isLoading, isSuccess} = useDeposit(childABI, fName, arguement);
+	// claim faucet: 0x54fcBea987d18E027a827eE25e1943Cf0874Eba8	
+		
+
+const tokens = [
+  {
+    name: "USDC",
+    address: "0x31D3A7711a74b4Ec970F50c3eaf1ee47ba803A95"
+  },
+  {
+    name: "cbETH",
+    address: "0x7c6b91D9Be155A6Db01f749217d76fF02A7227F2"
+  },
+  {
+    name: "WETH",
+    address: "0x4200000000000000000000000000000000000006"
+  }
+];
+
   return (
     <main className='absolute w-[100%] top-0 -ml-20'>
         <section className='w-[100%] '>
