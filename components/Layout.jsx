@@ -10,7 +10,7 @@ export default function Layout({children}) {
   return (
     <main>
         <section className="w-[100%] h-screen" style={gradientStyle}>
-          <AppHeadNav/>
+          
 {children}
         </section>
     </main>
