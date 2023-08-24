@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import React, { useContext, useState } from 'react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
 import { GlobalContext } from '../context/GlobalContext';
 import MoonLoader from "react-spinners/MoonLoader";
 import { ethereum } from "../assets";
 import Image from 'next/image';
 import { coins } from "../utils/constants";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { AppHeadNav } from './AppHeadNav';
+import { AppHeadNav } from '../components/AppHeadNav';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { useSearchParams } from 'next/navigation'
 import { ethereum } from "../assets";
@@ -28,14 +26,6 @@ const Swap = () => {
 
   const [initialFirstCoin, setInitialFirstCoin] = useState(coins[0]);
   const [initialSecondCoin, setInitialSecondCoin] = useState(coins[1]);
-
-
-  const [showFirstCoin, setShowFirstCoin] = useState(false);
-  const [showSecondCoin, setShowSecondCoin] = useState(false);
-
-  const [initialFirstCoin, setInitialFirstCoin] = useState(coins[0]);
-  const [initialSecondCoin, setInitialSecondCoin] = useState(coins[1]);
-
   const [accountBalance, setAccountBalance] = useState('');
   const [balanceERC20, setBalanceERC20] = useState('');
   const { state, dispatch } = useContext(GlobalContext)
@@ -49,9 +39,6 @@ const Swap = () => {
   const [input2, setInput2] = useState(13);
 
   const [coin, selectedCoin] = useState(1);
-  // const [secondCoin, setSelectedCoin] = useState(1);
-  const [firstCoin, setSelectedCoin] = useState(0);
-  const [secondCoin, setSelectSecondCoin] = useState(1);
 
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
@@ -79,8 +66,7 @@ const Swap = () => {
     };
   }, []);
 
-  const firstRef = useRef(null);
-  const secondRef = useRef(null);
+
 
   useEffect(() => {
     // Function to handle click outside the div

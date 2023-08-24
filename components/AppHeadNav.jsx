@@ -1,7 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
-import { useContext, useState } from "react"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect , useState} from "react"
 import { GlobalContext } from "../context/GlobalContext"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import factoryABI from "../constant/factoryABI.json" 

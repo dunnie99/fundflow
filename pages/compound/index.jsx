@@ -4,10 +4,8 @@ import Layout from "../../components/Layout"
 import { useState } from "react"
 import Borrow from "./components/Borrow"
 import { AppHeadNav } from "../../components/AppHeadNav"
-import { GlobalContext } from "../../context/GlobalContext"
 
 
-import { AppHeadNav } from "../../components/AppHeadNav"
 
 const Compound = () => {
   const [open, setOpen] = useState(false)
