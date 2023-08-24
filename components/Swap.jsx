@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { GlobalContext } from '../context/GlobalContext';
 import MoonLoader from "react-spinners/MoonLoader";
 import { ethereum } from "../assets";
@@ -9,18 +9,48 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 const Swap = () => {
   const [swapMessage, setSwapMessage] = useState("Swap");
   const [currentSwap, setCurrentSwap] = useState(true);
+
+  const [showFirstCoin, setShowFirstCoin] = useState(false);
+  const [showSecondCoin, setShowSecondCoin] = useState(false);
+
+  const [initialFirstCoin, setInitialFirstCoin] = useState(coins[0]);
+  const [initialSecondCoin, setInitialSecondCoin] = useState(coins[1]);
+
   const [accountBalance, setAccountBalance] = useState('');
   const [balanceERC20, setBalanceERC20] = useState('');
   const { state, dispatch } = useContext(GlobalContext)
 
   const [input1, setInput1] = useState(1);
-  const [input2, setInput2] = useState(1);
+  const [input2, setInput2] = useState(13);
 
-  const [coin, selectedCoin] = useState(1);
-  const [secondCoin, setSelectedCoin] = useState(1);
+  const [firstCoin, setSelectedCoin] = useState(0);
+  const [secondCoin, setSelectSecondCoin] = useState(1);
 
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
+
+  const firstRef = useRef(null);
+  const secondRef = useRef(null);
+
+  // useEffect(() => {
+  //   // Function to handle click outside the div
+  //   function handleClickOutside(event) {
+  //     if (firstRef.current && !firstRef.current.contains(event.target)) {
+  //       setShowFirstCoin(!showFirstCoin);
+  //     }
+  //     if (secondRef.current && !secondRef.current.contains(event.target)) {
+  //       setShowSecondCoin(!showSecondCoin);
+  //     }
+  //   }
+
+  //   // Attach the event listener when the component mounts
+  //   document.addEventListener('click', handleClickOutside);
+
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, []);
 
   const swapFields = () => {
     // Swap the values of input1 and input2
@@ -29,6 +59,14 @@ const Swap = () => {
     setInput2(temp);
     setValue1(input2)
     setValue2(input1)
+
+    setInitialFirstCoin(initialSecondCoin)
+    setInitialSecondCoin(initialFirstCoin)
+
+    // setShowFirstCoin(initialFirstCoin.key)
+    // setShowSecondCoin(initialSecondCoin.key)
+
+    setShowSecondCoin(showSecondCoin)
     setCurrentSwap(!currentSwap)
   }
 
@@ -48,23 +86,23 @@ const Swap = () => {
                 onChange={(e) => { setInput1(e.target.value) }}
                 className="w-[60%] sm:w-full appearance-none input-ghost focus:outline-0 focus:bg-base-300 text-4xl"
               />
-              <div data-te-select-init className="rounded-xl bg-[#ACAFC9] cursor-pointer flex items-center text-black gap-3 focus:border-red-300 py-1 h-[40px] px-3 w-fit tracking-[0.26px]">
+              <div data-te-select-init onClick={() => { setShowFirstCoin(!showFirstCoin); setShowSecondCoin(false) }} className="rounded-xl bg-[#ACAFC9] cursor-pointer flex items-center text-black gap-3 focus:border-red-300 py-1 h-[40px] px-3 w-fit tracking-[0.26px]">
                 <div className='coin_bg p- rounded-2xl'>
                   <Image
-                    src={ethereum}
+                    src={initialFirstCoin?.icon}
                     alt={`chain_img`}
                     className="w-6 sm:w-8 object-cover"
                   />
                 </div>
-                <span value="1">ETH</span>
+                <span value="1">{initialFirstCoin?.symbol}</span>
                 <span className="mb-3">&#8964;</span>
               </div>
 
-              <div className='bg-white absolute rounded-xl p-2'>
+              <div ref={firstRef} className={`${!showFirstCoin && "hidden"} bg-white max-w-[250px] absolute rounded-xl p-2 mt-12 right-9`}>
                 <span>Select a token</span>
                 <div className='flex flex-wrap gap-2 my-3'>
                   {coins?.map((coin, index) => (
-                    <div key={index} className="hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex">
+                    <div onClick={() => { setSelectedCoin(index); setInitialFirstCoin(coin); setShowFirstCoin(false) }} key={index} className={`${firstCoin === index && "bg-[#ACAFC9] border-0"} hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex`}>
                       <Image
                         src={coin?.icon}
                         alt={`chain_img`}
@@ -77,14 +115,14 @@ const Swap = () => {
               </div>
 
             </div>
-            <span className="">
+            <span className="flex justify-end">
               Balance: {accountBalance === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
             </span>
           </div>
 
           <div
             onClick={swapFields}
-            className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[41%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
+            className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[48%] sm:top-[41%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
               <path fill-rule="evenodd" clipRule="evenodd" d="M19.1628 13.2372C19.079 13.1536 19.0125 13.0542 18.9672 12.9449C18.9218 12.8356 18.8984 12.7183 18.8984 12.6C18.8984 12.4816 18.9218 12.3644 18.9672 12.255C19.0125 12.1457 19.079 12.0464 19.1628 11.9628L24.5628 6.56276C24.6465 6.47909 24.7459 6.41271 24.8552 6.36742C24.9645 6.32214 25.0817 6.29883 25.2 6.29883C25.3184 6.29883 25.4356 6.32214 25.5449 6.36742C25.6542 6.41271 25.7536 6.47909 25.8372 6.56276C25.9209 6.64644 25.9873 6.74578 26.0326 6.85511C26.0779 6.96445 26.1012 7.08163 26.1012 7.19997C26.1012 7.3183 26.0779 7.43548 26.0326 7.54482C25.9873 7.65415 25.9209 7.75349 25.8372 7.83717L20.4372 13.2372C20.3536 13.321 20.2543 13.3875 20.145 13.4328C20.0356 13.4782 19.9184 13.5016 19.8 13.5016C19.6817 13.5016 19.5644 13.4782 19.4551 13.4328C19.3458 13.3875 19.2464 13.321 19.1628 13.2372Z" fill="#02051F" />
@@ -106,23 +144,23 @@ const Swap = () => {
                 onChange={(e) => { setInput2(e.target.value) }}
                 className="w-[60%] sm:w-full appearance-none input-ghost focus:outline-0 focus:bg-base-300 text-4xl"
               />
-              <div data-te-select-init className="rounded-xl bg-[#ACAFC9] cursor-pointer flex items-center text-black gap-3 focus:border-red-300 py-1 h-[40px] px-3 w-fit tracking-[0.26px]">
+              <div data-te-select-init onClick={() => { setShowSecondCoin(!showSecondCoin); setShowFirstCoin(false) }} className="rounded-xl bg-[#ACAFC9] cursor-pointer flex items-center text-black gap-3 focus:border-red-300 py-1 h-[40px] px-3 w-fit tracking-[0.26px]">
                 <div className='coin_bg p- rounded-2xl'>
                   <Image
-                    src={ethereum}
+                    src={initialSecondCoin?.icon}
                     alt={`chain_img`}
                     className="w-6 sm:w-8 object-cover"
                   />
                 </div>
-                <span value="1">ETH</span>
+                <span value="1">{initialSecondCoin?.symbol}</span>
                 <span className="mb-3">&#8964;</span>
               </div>
 
-              {/* <div className='bg-white absolute rounded-xl p-2'>
+              <div ref={secondRef} className={`${!showSecondCoin && "hidden"} bg-white max-w-[250px] absolute rounded-xl p-2 mt-12 right-9`}>
                 <span>Select a token</span>
                 <div className='flex flex-wrap gap-2 my-3'>
                   {coins?.map((coin, index) => (
-                    <div key={index} className="hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex">
+                    <div onClick={() => { setSelectSecondCoin(index); setInitialSecondCoin(coin); setShowSecondCoin(false) }} key={index} className={`${secondCoin === index && "bg-[#ACAFC9] border-0"} hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex`}>
                       <Image
                         src={coin?.icon}
                         alt={`chain_img`}
@@ -132,10 +170,12 @@ const Swap = () => {
                     </div>
                   ))}
                 </div>
-              </div> */}
+              </div>
+
+
 
             </div>
-            <span className="">
+            <span className="flex justify-end">
               Balance: {balanceERC20 === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
             </span>
           </div>
