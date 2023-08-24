@@ -1,4 +1,5 @@
 import {arrow} from "../../../assets/arrow.svg"
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 import Image from "next/image"
 import SingleSupply from "./SingleSupply"
@@ -13,7 +14,7 @@ const Supply = () => {
                   <div className="flex justify-end pt-2 border-b-[1px] pb-2 bordder-[#9B9B9B]">
                   <button onClick={()=>setOpen(!open)} className="w-[128px] flex gap-2 justify-center items-center border-[#9B9B9B] text-[#9B9B9B] h-[40px] border-[1px] rounded-[36px]">Supply
                   {/* <img src="/../arrow.svg" alt="" className="w-[24px] h-[24px]"/> */}
-                  <Image src={arrow} alt="" width={24} height={24}/>
+                  <AiOutlineArrowRight className="w-[24px] h-[24px]"  />
                   </button>
 
                   </div>
