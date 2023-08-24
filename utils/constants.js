@@ -119,13 +119,3 @@ export const coins = [
   }
 ]
 
-export const coins = [
-  {
-    symbol: "ETH",
-    icon: ethereum
-  },
-  {
-    symbol: "USDT",
-    icon: tether
-  }
-]
