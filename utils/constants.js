@@ -1,4 +1,4 @@
-import { anchorage, avalanche, bitgo, coinbase, ether_flow, ledger } from "../assets"
+import { anchorage, avalanche, bitgo, coinbase, ether_flow, ethereum, ledger, tether } from "../assets"
 
 export const glasses = [
   "Ethereum", "Polygon", "Avalanche", "Coinbase", "Arbitrum", "Optimism",
@@ -83,4 +83,37 @@ export const flowCards = [
     content: "Coinbase empowers both newcomers and seasoned enthusiasts to seamlessly delve into the world of cryptocurrencies.",
     image: anchorage
   },
+]
+
+export const coins = [
+  {
+    symbol: "ETH",
+    icon: ethereum,
+    key: 0,
+  },
+  {
+    symbol: "USDT",
+    icon: tether,
+    key: 1,
+  },
+  {
+    symbol: "ETH",
+    icon: ethereum,
+    key: 2,
+  },
+  {
+    symbol: "USDT",
+    icon: tether,
+    key: 3,
+  },
+  {
+    symbol: "ETH",
+    icon: ethereum,
+    key: 4,
+  },
+  {
+    symbol: "USDT",
+    icon: tether,
+    key: 5,
+  }
 ]

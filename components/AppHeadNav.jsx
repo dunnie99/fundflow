@@ -8,7 +8,7 @@ export const AppHeadNav = () => {
 
   return (
     <nav
-      className="relative flex w-full items-center justify-between bg-[#CDCFDE] py-2 sm:py-5 sm:px-16 px-6"
+      className="relative flex w-full items-center justify-between bg-[#CDCFDE] py-2 sm:py-5 sm:px-16 px-4"
       data-te-navbar-ref>
       <div className="flex w-full justify-between items-center">
         <div className="flex">
@@ -95,15 +95,7 @@ export const AppHeadNav = () => {
               const ready = mounted && authenticationStatus !== 'loading';
               const connected =
                 ready &&
-                account &&
-                dispatch({
-                  type: "SET_CONNECTED",
-                  payload: true,
-                }) &&
-                dispatch({
-                  type: "SET_BALANCE",
-                  payload: account.displayBalance,
-                })
+                account
                 &&
                 chain &&
                 (!authenticationStatus ||
@@ -136,7 +128,7 @@ export const AppHeadNav = () => {
                               className="mb-4 pl-2 md:mb-0 md:pl-0 md:pr-1"
                               data-te-nav-item-ref>
                               <span
-                                className="p- mono_font text-white text-2xl transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
+                                className="p- mono_font text-white text-xl transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
                                 data-te-nav-link-ref> Connect</span>
                             </div>
                           </div>
