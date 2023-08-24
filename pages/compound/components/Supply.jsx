@@ -10,7 +10,7 @@ const Supply = () => {
     <div className="w-[90%] mx-auto h-[500px] bg-[#2F3677] mt-[20px] rounded-[36px] ">
                 <div className="w-[90%] mx-auto pt-[20px]">
                   <div className="flex justify-end pt-2 border-b-[1px] pb-2 bordder-[#9B9B9B]">
-                  <button onClick={()=>setOpen(!open)} className="w-[128px] flex gap-2 justify-center items-center border-[#9B9B9B] text-[#9B9B9B] h-[40px] border-[1px] rounded-[36px]">Supply
+                  <button onClick={()=>setOpen(!open)} className="w-[128px] flex gap-2 justify-center items-center border-[#9B9B9B] text-[#9B9B9B] h-[40px] border-[1px] rounded-[36px] z-[1]">Supply
                   <Image src={arrow} alt="" width={24} height={24}/>
                   </button>
 
