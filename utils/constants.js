@@ -1,4 +1,5 @@
 import { anchorage, avalanche, bitgo, coinbase, ether_flow, ethereum, ledger, tether } from "../assets"
+import { anchorage, avalanche, bitgo, coinbase, ether_flow, ethereum, ledger, tether } from "../assets"
 
 export const glasses = [
   "Ethereum", "Polygon", "Avalanche", "Coinbase", "Arbitrum", "Optimism",
@@ -115,5 +116,16 @@ export const coins = [
     symbol: "USDT",
     icon: tether,
     key: 5,
+  }
+]
+
+export const coins = [
+  {
+    symbol: "ETH",
+    icon: ethereum
+  },
+  {
+    symbol: "USDT",
+    icon: tether
   }
 ]
