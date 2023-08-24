@@ -17,7 +17,7 @@ const Borrow = () => {
           <div className="flex justify-end pt-2 border-b-[1px] pb-2 bordder-[#9B9B9B]">
             <button
               onClick={() => setOpen(!open)}
-              className="w-[128px] flex gap-2 justify-center items-center border-[#9B9B9B] text-[#9B9B9B] h-[40px] border-[1px] rounded-[36px]"
+              className="w-[128px] flex gap-2 justify-center items-center border-[#9B9B9B] text-[#9B9B9B] h-[40px] border-[1px] z-[1] rounded-[36px]"
             >
               Borrow
               {/* <img src="/../arrow.svg" alt="" className="w-[24px] h-[24px]"/> */}
