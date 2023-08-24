@@ -8,22 +8,14 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  arbitrum,
-  goerli,
-  mainnet,
-  optimism,
-  polygon,
-  zora,
+  baseGoerli,
+  goerli
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    zora,
+    baseGoerli,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
   ],
   [publicProvider()]

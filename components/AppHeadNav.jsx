@@ -6,12 +6,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import factoryABI from "../constant/factoryABI.json" 
 import {Factory, CometAddress} from "../constant/address"
 import {toast} from "react-toastify"
-import { useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 
 export const AppHeadNav = ({ app }) => {
   const { state, dispatch } = useContext(GlobalContext)
   const [currentApp, setCurrentApp] = useState(app)
-
+  const [detail, setDetail] =useState(false);
+  const {address} = useAccount();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -36,21 +37,15 @@ export const AppHeadNav = ({ app }) => {
 
     router.push(`${pathname}${query}`);
   };
-// const {address} = useContext()
 
-console.log(state.address);
   const { data:readData, isError:readError, isLoading:readLoading, isSuccess:readSuccess } = useContractRead({
     address: Factory,
     abi: factoryABI,
     functionName: "obtainAccountStatus",
-    // args: [address],
+    args: [address],
   });
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setDetail(data);
-  //   }
-  // }, [isSuccess, data]);
+ 
 
 
   const { config } = usePrepareContractWrite({
@@ -68,7 +63,6 @@ console.log(state.address);
     onSuccess(data) {
       // console.log('Success', data)
       toast.success("Account created");
-    
     },
 
   })
@@ -85,8 +79,13 @@ console.log(state.address);
     if(isError){
       toast.error("Error Occur, try again")
     }
-
-  }, [isError])
+    if (readSuccess) {
+          setDetail(readData);
+        }
+  }, [isError, readData, readSuccess])
+   // useEffect(() => {
+  //  
+  // }, [isSuccess, data]);
 
   return (
     <nav
@@ -123,7 +122,7 @@ console.log(state.address);
                 data-te-nav-item-ref>
                 <Link
                   className="p-0 transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
-                  href="/swap"
+                  href="/app?source=aave"
                   data-te-nav-link-ref
                 >Swap</Link>
               </div>
@@ -160,9 +159,11 @@ console.log(state.address);
             <option value="uniswap">Uniswap</option>
             <option value="baseswap">Baseswap</option>
           </select>
+          {detail === false &&
         <button onClick={handlesubmit} className="bg-[#02051F] text-[#CDCFDE] text-[16px] font-normal py-[16px] px-[10px] rounded-2xl">
           {isLoading || cwriteLoading ? 'Creating ...' :"Create Account"}
         </button>
+        }
 
           <ConnectButton.Custom>
             {({
