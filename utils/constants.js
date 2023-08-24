@@ -88,10 +88,32 @@ export const flowCards = [
 export const coins = [
   {
     symbol: "ETH",
-    icon: ethereum
+    icon: ethereum,
+    key: 0,
   },
   {
     symbol: "USDT",
-    icon: tether
+    icon: tether,
+    key: 1,
+  },
+  {
+    symbol: "ETH",
+    icon: ethereum,
+    key: 2,
+  },
+  {
+    symbol: "USDT",
+    icon: tether,
+    key: 3,
+  },
+  {
+    symbol: "ETH",
+    icon: ethereum,
+    key: 4,
+  },
+  {
+    symbol: "USDT",
+    icon: tether,
+    key: 5,
   }
 ]
