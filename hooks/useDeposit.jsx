@@ -1,10 +1,10 @@
 
-import { usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
-export default function useDeposit({ABI, fName, arguement, }) {    
+export default function useDeposit({ABI, fName, arguement, CA }) {    
     
       const { config } = usePrepareContractWrite({
-        address: Factory,
+        address: CA,
         abi: ABI,
         functionName: fName,
         // args: [ CometAddress ],
