@@ -7,7 +7,6 @@ const App = () => {
   return (
     <div>
       <GlobalProvider>
-        <AppHeadNav />
         <Swap />
       </GlobalProvider>
     </div>
