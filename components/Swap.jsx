@@ -82,25 +82,25 @@ const Swap = () => {
   const firstRef = useRef(null);
   const secondRef = useRef(null);
 
-  // useEffect(() => {
-  //   // Function to handle click outside the div
-  //   function handleClickOutside(event) {
-  //     if (firstRef.current && !firstRef.current.contains(event.target)) {
-  //       setShowFirstCoin(!showFirstCoin);
-  //     }
-  //     if (secondRef.current && !secondRef.current.contains(event.target)) {
-  //       setShowSecondCoin(!showSecondCoin);
-  //     }
-  //   }
+  useEffect(() => {
+    // Function to handle click outside the div
+    function handleClickOutside(event) {
+      // if (firstRef.current && !firstRef.current.contains(event.target)) {
+      //   setShowFirstCoin(false);
+      // }
+      // if (secondRef.current && !secondRef.current.contains(event.target)) {
+      //   setShowSecondCoin(!showSecondCoin);
+      // }
+    }
 
-  //   // Attach the event listener when the component mounts
-  //   document.addEventListener('click', handleClickOutside);
+    // Attach the event listener when the component mounts
+    document.addEventListener('click', handleClickOutside);
 
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, []);
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const swapFields = () => {
     // Swap the values of input1 and input2
@@ -124,8 +124,8 @@ const Swap = () => {
     setInitialFirstCoin(initialSecondCoin)
     setInitialSecondCoin(initialFirstCoin)
 
-    // setShowFirstCoin(initialFirstCoin.key)
-    // setShowSecondCoin(initialSecondCoin.key)
+    setSelectedCoin(initialSecondCoin.key)
+    setSelectSecondCoin(initialFirstCoin.key)
 
     setShowSecondCoin(showSecondCoin)
     setCurrentSwap(!currentSwap)
