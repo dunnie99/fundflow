@@ -1,18 +1,14 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
-import { useContext, useEffect , useState} from "react"
+import { useContext, useState } from "react"
 import { GlobalContext } from "../context/GlobalContext"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import factoryABI from "../constant/factoryABI.json" 
-import {Factory, CometAddress} from "../constant/address"
-import {toast} from "react-toastify"
-import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 
+export const AppHeadNav = ({ app }) => {
 export const AppHeadNav = ({ app }) => {
   const { state, dispatch } = useContext(GlobalContext)
   const [currentApp, setCurrentApp] = useState(app)
-  const [detail, setDetail] =useState(false);
-  const {address} = useAccount();
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -37,55 +33,6 @@ export const AppHeadNav = ({ app }) => {
 
     router.push(`${pathname}${query}`);
   };
-
-  const { data:readData, isError:readError, isLoading:readLoading, isSuccess:readSuccess } = useContractRead({
-    address: Factory,
-    abi: factoryABI,
-    functionName: "obtainAccountStatus",
-    args: [address],
-  });
-
- 
-
-
-  const { config } = usePrepareContractWrite({
-    address: Factory,
-    abi: factoryABI,
-    functionName: 'CreateAccount',
-    args: [ CometAddress ],
-  })
-
-
-  const {data:cwriteData, isLoading:cwriteLoading, write:cwriteWrite} = useContractWrite(config)
-
-  const {data, isError, isLoading} = useWaitForTransaction({
-    hash: cwriteData?.hash,
-    onSuccess(data) {
-      // console.log('Success', data)
-      toast.success("Account created");
-    },
-
-  })
-  
-
-
-  const handlesubmit =(e)=>{
-    e.preventDefault()
-
-    cwriteWrite?.()
-  }
-
-  useEffect(()=>{
-    if(isError){
-      toast.error("Error Occur, try again")
-    }
-    if (readSuccess) {
-          setDetail(readData);
-        }
-  }, [isError, readData, readSuccess])
-   // useEffect(() => {
-  //  
-  // }, [isSuccess, data]);
 
   return (
     <nav
@@ -153,6 +100,11 @@ export const AppHeadNav = ({ app }) => {
           </span>
         </button>
 
+        <div className="flex bg- items-center text-black gap-5 hidden sm:flex">
+          <select value={app} onChange={(e) => { setCurrentApp(e.target.value); changeParams(e) }} data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-fit">
+            <option value="aave" >Aave</option>
+            <option value="uniswap">Uniswap</option>
+            <option value="baseswap">Baseswap</option>
         <div className="flex bg- items-center text-black gap-5 hidden sm:flex">
           <select value={app} onChange={(e) => { setCurrentApp(e.target.value); changeParams(e) }} data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-fit">
             <option value="aave" >Aave</option>
@@ -256,6 +208,7 @@ export const AppHeadNav = ({ app }) => {
                           )}
                           {chain.name}
                         </button>
+                        <button onClick={openAccountModal} type="button" className="">
                         <button onClick={openAccountModal} type="button" className="">
                           {account.displayName}
                           {account.displayBalance
