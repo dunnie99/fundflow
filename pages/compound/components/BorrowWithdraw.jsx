@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 
-export default function SupplyWithdraw() {
+export default function BorrowWithdraw() {
   return (
     <main className='absolute w-[100%] -mt-32 -ml-20'>
         <section className='w-[100%] '>
@@ -25,8 +25,8 @@ export default function SupplyWithdraw() {
                 <p className="font-normal text-[17px] text-[#02051f]">Available balance: <span className='text-[24px] font-secondary font-normal text-[#02051f]'>$10.00</span></p>
                 </div>
                 <div className="w-[80%] mx-auto flex gap-6 pt-6 pb-6">
-                  <button className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>Supply</button>
-                  <button className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>Withdraw</button>
+                  <button className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>Borrow</button>
+                  <button className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>Payback</button>
                 </div>
             </div>
 
