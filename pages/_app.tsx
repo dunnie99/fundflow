@@ -5,6 +5,8 @@ import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import type { AppProps } from 'next/app';
 import GlobalProvider from '../context/GlobalContext'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   arbitrum,
   goerli,
@@ -47,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalProvider>
         <Component {...pageProps} />
         </GlobalProvider>
+        <ToastContainer/>
       </RainbowKitProvider>
     </WagmiConfig>
   );

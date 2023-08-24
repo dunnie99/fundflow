@@ -1,8 +1,13 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
 import { useContext, useState } from "react"
+import { useContext, useEffect } from "react"
 import { GlobalContext } from "../context/GlobalContext"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import factoryABI from "../constant/factoryABI.json" 
+import {Factory, CometAddress} from "../constant/address"
+import {toast} from "react-toastify"
+import { useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 
 export const AppHeadNav = ({ app }) => {
   const { state, dispatch } = useContext(GlobalContext)
@@ -32,6 +37,57 @@ export const AppHeadNav = ({ app }) => {
 
     router.push(`${pathname}${query}`);
   };
+// const {address} = useContext()
+
+console.log(state.address);
+  const { data:readData, isError:readError, isLoading:readLoading, isSuccess:readSuccess } = useContractRead({
+    address: Factory,
+    abi: factoryABI,
+    functionName: "obtainAccountStatus",
+    // args: [address],
+  });
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setDetail(data);
+  //   }
+  // }, [isSuccess, data]);
+
+
+  const { config } = usePrepareContractWrite({
+    address: Factory,
+    abi: factoryABI,
+    functionName: 'CreateAccount',
+    args: [ CometAddress ],
+  })
+
+
+  const {data:cwriteData, isLoading:cwriteLoading, write:cwriteWrite} = useContractWrite(config)
+
+  const {data, isError, isLoading} = useWaitForTransaction({
+    hash: cwriteData?.hash,
+    onSuccess(data) {
+      // console.log('Success', data)
+      toast.success("Account created");
+    
+    },
+
+  })
+  
+
+
+  const handlesubmit =(e)=>{
+    e.preventDefault()
+
+    cwriteWrite?.()
+  }
+
+  useEffect(()=>{
+    if(isError){
+      toast.error("Error Occur, try again")
+    }
+
+  }, [isError])
 
   return (
     <nav
@@ -105,7 +161,9 @@ export const AppHeadNav = ({ app }) => {
             <option value="uniswap">Uniswap</option>
             <option value="baseswap">Baseswap</option>
           </select>
-
+        <button onClick={handlesubmit} className="bg-[#02051F] text-[#CDCFDE] text-[16px] font-normal py-[16px] px-[10px] rounded-2xl">
+          {isLoading || cwriteLoading ? 'Creating ...' :"Create Account"}
+        </button>
 
           <ConnectButton.Custom>
             {({
