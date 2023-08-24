@@ -1,7 +1,7 @@
 "use client"
 import Supply from "./components/Supply"
 import Layout from "../../components/Layout"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Borrow from "./components/Borrow"
 import { AppHeadNav } from "../../components/AppHeadNav"
 
