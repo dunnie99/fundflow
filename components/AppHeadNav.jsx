@@ -1,13 +1,19 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { GlobalContext } from "../context/GlobalContext"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams, useRouter } from "next/navigation"
+
+import factoryABI from "../constant/factoryABI.json"
+import { Factory, CometAddress } from "../constant/address"
+import { toast } from "react-toastify"
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 
 export const AppHeadNav = ({ app }) => {
   const { state, dispatch } = useContext(GlobalContext)
   const [currentApp, setCurrentApp] = useState(app)
-
+  const [detail, setDetail] = useState(false);
+  const { address } = useAccount();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -32,6 +38,54 @@ export const AppHeadNav = ({ app }) => {
 
     router.push(`${pathname}${query}`);
   };
+  const { data: readData, isError: readError, isLoading: readLoading, isSuccess: readSuccess } = useContractRead({
+    address: Factory,
+    abi: factoryABI,
+    functionName: "obtainAccountStatus",
+    args: [address],
+  });
+
+
+
+
+  const { config } = usePrepareContractWrite({
+    address: Factory,
+    abi: factoryABI,
+    functionName: 'CreateAccount',
+    args: [CometAddress],
+  })
+
+
+  const { data: cwriteData, isLoading: cwriteLoading, write: cwriteWrite } = useContractWrite(config)
+
+  const { data, isError, isLoading } = useWaitForTransaction({
+    hash: cwriteData?.hash,
+    onSuccess(data) {
+      // console.log('Success', data)
+      toast.success("Account created");
+    },
+
+  })
+
+
+
+  const handlesubmit = (e) => {
+    e.preventDefault()
+
+    cwriteWrite?.()
+  }
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Error Occur, try again")
+    }
+    if (readSuccess) {
+      setDetail(readData);
+    }
+  }, [isError, readData, readSuccess])
+  // useEffect(() => {
+  //  
+  // }, [isSuccess, data]);
 
   return (
     <nav
@@ -44,7 +98,7 @@ export const AppHeadNav = ({ app }) => {
           </Link>
 
           <div
-            className="!visible mt-2 hidden mono_font text-2xl items-center md:mt-0 md:!flex md:basis-auto"
+            className="!visible mt-2 hidden mono_font text-xl items-center md:mt-0 md:!flex md:basis-auto"
             id="navbarSupportedContent3"
             data-te-collapse-item>
 
@@ -68,7 +122,7 @@ export const AppHeadNav = ({ app }) => {
                 data-te-nav-item-ref>
                 <Link
                   className="p-0 transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
-                  href="/swap"
+                  href="/app?source=aave"
                   data-te-nav-link-ref
                 >Swap</Link>
               </div>
@@ -105,7 +159,11 @@ export const AppHeadNav = ({ app }) => {
             <option value="uniswap">Uniswap</option>
             <option value="baseswap">Baseswap</option>
           </select>
-
+          {detail === false &&
+            <button onClick={handlesubmit} className="bg-[#02051F] text-[#CDCFDE] text-[16px] font-normal py-[16px] px-[10px] rounded-2xl">
+              {isLoading || cwriteLoading ? 'Creating ...' : "Create Account"}
+            </button>
+          }
 
           <ConnectButton.Custom>
             {({

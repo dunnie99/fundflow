@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { useState } from "react"
 
 export const HeadNav = () => {
+  const [showMobile, setShowMobile] = useState(false)
   return (
     <nav
       className="relative flex w-full items-center justify-between bgCol py-2 sm:py-5 sm:px-16 px-6"
@@ -12,10 +14,12 @@ export const HeadNav = () => {
           </Link>
         </div>
 
-        <button
+        <label
+          onClick={() => setShowMobile(!showMobile)}
           className="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 md:hidden"
           type="button"
           data-te-collapse-init
+          for="navbarSupportedContent3"
           data-te-target="#navbarSupportedContent3"
           aria-controls="navbarSupportedContent3"
           aria-expanded="false"
@@ -33,7 +37,69 @@ export const HeadNav = () => {
                 clip-rule="evenodd" />
             </svg>
           </span>
-        </button>
+        </label>
+
+        <menu className={` ${!showMobile && "hidden"} absolute bgCol top-12 right-9 max-w-[400px] rounded-2xl py-6 pr-16 pb-3 block sm:hidden`}>
+          <div
+            className="list-style-none mr-auto flex flex-col pl-4 md:mt-1 md:flex-row text-white"
+            data-te-navbar-nav-ref>
+
+            <div
+              className="my-4 pl-2 md:my-0 md:pl-2 md:pr-1 pb-3"
+              data-te-nav-item-ref>
+              <Link
+                className="md:px-2 "
+                aria-current="page"
+                href="/governance"
+                data-te-nav-link-ref
+                onClick={() => setShowMobile(false)}
+              >Governance</Link >
+            </div>
+
+            <div
+              className="mb-4 pl-2 md:mb-0 md:pl-0 md:pr-1 pb-3"
+              data-te-nav-item-ref>
+              <Link
+                className="p-0 transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
+                href="/docs"
+                data-te-nav-link-ref
+                onClick={() => setShowMobile(false)}
+              >Docs</Link>
+            </div>
+
+            <div
+              className="mb-4 pl-2 md:mb-0 md:pl-0 md:pr-1 pb-3"
+              data-te-nav-item-ref>
+              <Link
+                href="/developers"
+                className="p-0 transition duration-200 motion-reduce:transition-none md:px-2"
+                data-te-nav-link-ref
+                onClick={() => setShowMobile(false)}
+              >Developers</Link>
+            </div>
+
+            <Link
+              href="#apps"
+              className="!visible mt- bg-[#CDCFDE] p-2 rounded-2xl flex-gro basis-[100%] items-center md:mt-0 md:!flex md:basis-auto"
+              id="navbarSupportedContent3"
+              data-te-collapse-item>
+
+              <div
+                className="list-style-none mr-auto flex flex-col pl-0 md:mt-1 md:flex-row"
+                data-te-navbar-nav-ref>
+
+                <div
+                  className="mb- pl-2 md:mb-0 md:pl-0 md:pr-1"
+                  data-te-nav-item-ref>
+                  <span
+                    className="p-0 mono_font text-2xl  transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 motion-reduce:transition-none md:px-2"
+                    data-te-nav-link-ref>Launch Apps</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </menu>
+
 
 
         <div
