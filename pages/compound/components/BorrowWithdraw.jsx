@@ -138,8 +138,9 @@ console.log(readData);
               openDrop &&
               <div className="absolute bg-[#FEFEFE] w-[200px] border-[1px] shadow-lg ">
                 <div className="w-[90%] mx-auto pt-4 pb-4 flex flex-col gap-2">
-                  {tokens.map((token, index) => (
+                  {tokens?.map((token, index) => (
                     <div key={index} onClick={() => { setAddr(token.address); setSelected(token.name); setOpenDrop(false) }} className="">
+                       <p className="">{token.name}</p>
                     </div>
                   ))
 
@@ -155,7 +156,6 @@ console.log(readData);
               </div>
               <div className="w-[85%] mt-4 mx-auto">
                   <p className="font-normal text-[17px] text-[#02051f]">borrow/payback</p>
-                <p className="font-normal text-[17px] text-[#02051f]">borrow/payback</p>
               </div>
             </div>
             {/* <div className="pt-4 pb-4 border-b-[1px] border-[#ACAFC9]">
