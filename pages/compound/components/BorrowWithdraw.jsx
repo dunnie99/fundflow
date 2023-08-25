@@ -26,13 +26,14 @@ console.log(readData);
     abi: childABI,
     functionName: "repayLoan",
     // args: [ CometAddress ],
-    args: [addr, ethers?.utils?.parseEther(`${amt}`)]
     args: [addr, amt !== "" ? ethers?.parseEther(amt) : ethers?.parseEther("0")]
+  })
   
 
 
   const { data: cwriteData, isLoading: cwriteLoading, write: cwriteWrite, isSuccess } = useContractWrite(config)
-  const {data, isError, isLoading, } = useWaitForTransaction({
+
+
   const { data, isError, isLoading, } = useWaitForTransaction({
     onSuccess(data) {
       // console.log('Success', data)
@@ -45,18 +46,17 @@ console.log(readData);
 
 
   // borrow
-  const { config:borrowConfig } = usePrepareContractWrite({
   const { config: borrowConfig, } = usePrepareContractWrite({
     abi: childABI,
     functionName: "borrow",
-    args: [addr, ethers.parseEther("100")]
     args: [addr, amt !== "" ? ethers?.parseEther(amt) : ethers?.parseEther("0")]
+
+  })
   
 
-  const {data:borrowData, isLoading:borrowLoading, write:borrowWrite, isSuccess:borrowSuccess} = useContractWrite(borrowConfig)
+
   const { data: borrowData, isLoading: borrowLoading, write: borrowWrite, isSuccess: borrowSuccess } = useContractWrite(borrowConfig)
 
-  const {data:borrowWaitData, isError:borrowWaitError, isLoading:borrowWaitLoading, } = useWaitForTransaction({
   const { data: borrowWaitData, isError: borrowWaitError, isLoading: borrowWaitLoading, } = useWaitForTransaction({
     onSuccess(data) {
       // console.log('Success', data)
@@ -66,6 +66,7 @@ console.log(readData);
     },
 
   })
+ 
 
 
 	// claim faucet: 0x54fcBea987d18E027a827eE25e1943Cf0874Eba8	
@@ -85,7 +86,7 @@ console.log(readData);
     }
   ];
 
-const handlePayback = (e) =>{
+
   const handlePayback = (e) => {
     e.preventDefault()
     if (amt === "") {
@@ -94,7 +95,8 @@ const handlePayback = (e) =>{
       cwriteWrite?.();
     }
   }
-const handleBorrow = (e) =>{
+
+
   const handleBorrow = (e) => {
     e.preventDefault()
     if (amt === "") {
@@ -103,7 +105,7 @@ const handleBorrow = (e) =>{
       borrowWrite?.()
     }
   }
-useEffect(()=>{
+
   useEffect(() => {
     if (addr === "") {
       setAddr("0x31D3A7711a74b4Ec970F50c3eaf1ee47ba803A95")
@@ -116,10 +118,12 @@ useEffect(()=>{
     }
     setUsrAdr(readData);
   }, [addr, readData, isError, borrowWaitError])
+
   console.log("factory addr", usrAdr)
+
   return (
     <main className='absolute w-[100%] top-0 -ml-20'>
-        <section className='w-[100%] '>
+      <section className='w-[100%] '>
       <section className='w-[100%] '>
         <div className="w-[35%] bg-[#FEFEFE] mt-[302px] rounded-[36px] mx-auto">
           <div className="w-[90%] mx-auto">
@@ -142,9 +146,8 @@ useEffect(()=>{
                   }
                   </div>
                 </div>
-              </div>
+           
                 }
-            }
             <div className="pt-4 pb-4 border-t-[1px] border-b-[1px] border-[#ACAFC9]">
               <div className="w-[85%] mx-auto text-[#585E92] flex gap-2 items-center">
                 <p className="text-[24px] font-normal">$</p>
@@ -167,6 +170,8 @@ useEffect(()=>{
         </div>
 
       </section>
+      </section>
+      </main>
 
   )
 }
