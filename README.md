@@ -8,22 +8,22 @@ First, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Factory Cotract Address 0x359327A0F2EFc1746C476D0D0F73435F16ea9EC9
+  **Account creation** 
+  ##### on click of the create Account an address is  generated which serves as the user personal address
+  ##### Compound and uniswap contract is interacted with
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+  ##### token addresses in compound documentation are used in interacting with the contract 
 
-## Learn More
+  ##### Faucet address to mint token  0x54fcBea987d18E027a827eE25e1943Cf0874Eba8
+  ##### token address 
+  name: "USDC",
+    address: "0x31D3A7711a74b4Ec970F50c3eaf1ee47ba803A95"
+    name: "cbETH",
+    address: "0x7c6b91D9Be155A6Db01f749217d76fF02A7227F2"
+    name: "WETH",
+    address: "0x4200000000000000000000000000000000000006"
 
-To learn more about this stack, take a look at the following resources:
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
