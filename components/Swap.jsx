@@ -12,7 +12,7 @@ import { useSearchParams } from 'next/navigation'
 const Swap = () => {
   const [swapMessage, setSwapMessage] = useState("Swap");
   const [currentSwap, setCurrentSwap] = useState(true);
-  const { address, isConnected } = useAccount()
+  const { isConnected } = useAccount()
 
   const searchParams = useSearchParams()
   let app = searchParams.get("source")
@@ -92,9 +92,9 @@ const Swap = () => {
   return (
     <div className="px- sm:px-0 h-screen">
       <div className='main_app_bg relative h-full '>
-        <AppHeadNav app={app} setSearchParams />
-        <div className="w-full md:max-w-fit px-4 mx-auto bg-[#fefefe] p-4 relative top-20 left-0 right-0 rounded-[36px]">
-          <span className="my-3 block pl-2 text-2xl text-[#02051F]">Swap</span>
+        <AppHeadNav app={app} />
+        <div className="w-full md:max-w-fit px-4 sm:mx-auto bg-[#fefefe] p-4 relative top-20 left-0 right-0 rounded-[36px]">
+          <div className="my-3 block pl-2 text-2xl text-[#02051F]">Swap</div>
           <div className="flex flex-col gap-3 w-full border-opacity-50 text-[#8287AE]">
             <div className="h-fit bg-[#CDCFDE] rounded-3xl rounded-box place-items-center p-5">
               <span className='text-lg'>You Pay</span>
@@ -120,7 +120,7 @@ const Swap = () => {
                 </div>
 
                 <div ref={firstRef} className={`${!showFirstCoin && "hidden"} bg-white max-w-[250px] absolute rounded-xl p-2 mt-12 right-9`}>
-                  <span>Select a token</span>
+                  Select a token
                   <div className='flex flex-wrap gap-2 my-3'>
                     {coins?.map((coin, index) => (
                       <div onClick={() => { setSelectedCoin(index); setInitialFirstCoin(coin); setShowFirstCoin(false) }} key={index} className={`${firstCoin === index && "bg-[#ACAFC9] border-0"} hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex`}>
@@ -140,15 +140,10 @@ const Swap = () => {
                 Balance: {accountBalance === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
               </span>
             </div>
-              </div>
-              <span className="flex justify-end">
-                Balance: {accountBalance === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
-              </span>
-            </div>
 
             <div
               onClick={swapFields}
-              className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[42%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
+              className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[41%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
                 <path fill-rule="evenodd" clipRule="evenodd" d="M19.1628 13.2372C19.079 13.1536 19.0125 13.0542 18.9672 12.9449C18.9218 12.8356 18.8984 12.7183 18.8984 12.6C18.8984 12.4816 18.9218 12.3644 18.9672 12.255C19.0125 12.1457 19.079 12.0464 19.1628 11.9628L24.5628 6.56276C24.6465 6.47909 24.7459 6.41271 24.8552 6.36742C24.9645 6.32214 25.0817 6.29883 25.2 6.29883C25.3184 6.29883 25.4356 6.32214 25.5449 6.36742C25.6542 6.41271 25.7536 6.47909 25.8372 6.56276C25.9209 6.64644 25.9873 6.74578 26.0326 6.85511C26.0779 6.96445 26.1012 7.08163 26.1012 7.19997C26.1012 7.3183 26.0779 7.43548 26.0326 7.54482C25.9873 7.65415 25.9209 7.75349 25.8372 7.83717L20.4372 13.2372C20.3536 13.321 20.2543 13.3875 20.145 13.4328C20.0356 13.4782 19.9184 13.5016 19.8 13.5016C19.6817 13.5016 19.5644 13.4782 19.4551 13.4328C19.3458 13.3875 19.2464 13.321 19.1628 13.2372Z" fill="#02051F" />
@@ -181,44 +176,7 @@ const Swap = () => {
                   <span value="1">{initialSecondCoin?.symbol}</span>
                   <span className="mb-3">&#8964;</span>
                 </div>
-            <div className="h-fit bg-[#CDCFDE] mb-4 rounded-3xl rounded-box place-items-center p-5">
-              <span className='text-lg'>You Receive</span>
-              <div className="text-xl focus:outline-1 flex items-cente my-3">
-                <input
-                  type="number"
-                  value={input2}
-                  disabled
-                  style={{ backgroundColor: 'transparent' }}
-                  onChange={(e) => { setInput2(e.target.value) }}
-                  className="w-[60%] sm:w-full appearance-none input-ghost focus:outline-0 focus:bg-base-300 text-4xl"
-                />
-                <div data-te-select-init onClick={() => { setShowSecondCoin(!showSecondCoin); setShowFirstCoin(false) }} className="rounded-xl bg-[#ACAFC9] cursor-pointer flex items-center text-black gap-3 focus:border-red-300 py-1 h-[40px] px-3 w-fit tracking-[0.26px]">
-                  <div className='coin_bg p- rounded-2xl'>
-                    <Image
-                      src={initialSecondCoin?.icon}
-                      alt={`chain_img`}
-                      className="w-6 sm:w-8 object-cover"
-                    />
-                  </div>
-                  <span value="1">{initialSecondCoin?.symbol}</span>
-                  <span className="mb-3">&#8964;</span>
-                </div>
 
-                <div ref={secondRef} className={`${!showSecondCoin && "hidden"} bg-white max-w-[250px] absolute rounded-xl p-2 mt-12 right-9`}>
-                  <span>Select a token</span>
-                  <div className='flex flex-wrap gap-2 my-3'>
-                    {coins?.map((coin, index) => (
-                      <div onClick={() => { setSelectSecondCoin(index); setInitialSecondCoin(coin); setShowSecondCoin(false) }} key={index} className={`${secondCoin === index && "bg-[#ACAFC9] border-0"} hover:cursor-pointer flex items-center w-fit border gap-2 rounded-2xl px-3 py-1 text-center flex`}>
-                        <Image
-                          src={coin?.icon}
-                          alt={`chain_img`}
-                          className="w-6 sm:w-8 h-6 sm:h-8"
-                        />
-                        {coin?.symbol}
-                      </div>
-                    ))}
-                  </div>
-                </div>
                 <div ref={secondRef} className={`${!showSecondCoin && "hidden"} bg-white max-w-[250px] absolute rounded-xl p-2 mt-12 right-9`}>
                   <span>Select a token</span>
                   <div className='flex flex-wrap gap-2 my-3'>
@@ -242,13 +200,8 @@ const Swap = () => {
                 Balance: {balanceERC20 === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
               </span>
             </div>
-              </div>
-              <span className="flex justify-end">
-                Balance: {balanceERC20 === "" ? "N/A" : currentSwap ? state?.balanceETH : 20}
-              </span>
-            </div>
 
-            {isConnected &&
+            {state?.connected === "true" &&
               <div
                 className="!visible mt-2 bg-[#000] py-3 px-3 rounded-2xl text-center items-center md:mt-0 md:!flex md:basis-auto hover:cursor-pointer"
                 id="navbarSupportedContent3"
@@ -276,113 +229,111 @@ const Swap = () => {
                 </div>
               </div>
             }
-          </div>
-          {!isConnected &&
-            <ConnectButton.Custom>
-              {({
-                account,
-                chain,
-                openAccountModal,
-                openChainModal,
-                openConnectModal,
-                authenticationStatus,
-                mounted,
-              }) => {
-                // Note: If your app doesn't use authentication, you
-                // can remove all 'authenticationStatus' checks
-                const ready = mounted && authenticationStatus !== 'loading';
-                const connected =
-                  ready &&
-                  account
-                  &&
-                  chain &&
-                  (!authenticationStatus ||
-                    authenticationStatus === 'authenticated');
-                return (
-                  <div
-                    {...(!ready && {
-                      'aria-hidden': true,
-                      'style': {
-                        opacity: 0,
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      },
-                    })}
-                  >
-                    {(() => {
-                      if (!connected) {
-                        return (
-                          <div
-                            className="!visible mt-2 hidden bg-[#000] py-3 px-3 rounded-2xl text-center items-center md:mt-0 md:!flex md:basis-auto hover:cursor-pointer"
-                            id="navbarSupportedContent3"
-                            onClick={openConnectModal}
-                            data-te-collapse-item>
+            {state?.connected === "false" &&
+              <ConnectButton.Custom>
+                {({
+                  account,
+                  chain,
+                  openAccountModal,
+                  openChainModal,
+                  openConnectModal,
+                  authenticationStatus,
+                  mounted,
+                }) => {
+                  // Note: If your app doesn't use authentication, you
+                  // can remove all 'authenticationStatus' checks
+                  const ready = mounted && authenticationStatus !== 'loading';
+                  const connected =
+                    ready &&
+                    account
+                    &&
+                    chain &&
+                    (!authenticationStatus ||
+                      authenticationStatus === 'authenticated');
+                  return (
+                    <div
+                      {...(!ready && {
+                        'aria-hidden': true,
+                        'style': {
+                          opacity: 0,
+                          pointerEvents: 'none',
+                          userSelect: 'none',
+                        },
+                      })}
+                    >
+                      {(() => {
+                        if (!connected) {
+                          return (
+                            <div className="!visible mt-2 hidden bg-[#000] py-3 px-3 rounded-2xl text-center items-center md:mt-0 md:!flex md:basis-auto hover:cursor-pointer"
+                              id="navbarSupportedContent3"
+                              onClick={openConnectModal}
+                              data-te-collapse-item>
 
-                            <div
-                              className="list-style-none mr-auto flex w-full flex-col pl-0 md:mt-1 md:flex-row"
-                              data-te-navbar-nav-ref>
+                              <div className="list-style-none mr-auto flex w-full flex-col pl-0 md:mt-1 md:flex-row"
+                                data-te-navbar-nav-ref>
 
-                              <div
-                                className="mb-4 pl-2 md:mb-0 md:pl-0 md:pr-1 mx-auto"
-                                data-te-nav-item-ref>
-                                <span
-                                  className="p- mono_font text-white text-xl text-center transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
-                                  data-te-nav-link-ref>Connect Wallet</span>
+                                <div
+                                  className="mb-4 pl-2 md:mb-0 md:pl-0 md:pr-1 mx-auto"
+                                  data-te-nav-item-ref>
+                                  <span
+                                    className="p- mono_font text-white text-xl text-center transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
+                                    data-te-nav-link-ref>Connect Wallet</span>
+                                </div>
                               </div>
                             </div>
+                          );
+                        }
+                        if (chain.unsupported) {
+                          return (
+                            <button onClick={openChainModal} type="button">
+                              Wrong network
+                            </button>
+                          );
+                        }
+                        return (
+                          <div style={{ display: 'flex', gap: 12 }} className="border rounded-2xl p-4">
+                            <button
+                              onClick={openChainModal}
+                              style={{ display: 'flex', alignItems: 'center' }}
+                              type="button"
+                            >
+                              {chain.hasIcon && (
+                                <div
+                                  style={{
+                                    background: chain.iconBackground,
+                                    width: 12,
+                                    height: 12,
+                                    borderRadius: 999,
+                                    overflow: 'hidden',
+                                    marginRight: 4,
+                                  }}
+                                >
+                                  {chain.iconUrl && (
+                                    <img
+                                      alt={chain.name ?? 'Chain icon'}
+                                      src={chain.iconUrl}
+                                      style={{ width: 12, height: 12 }}
+                                    />
+                                  )}
+                                </div>
+                              )}
+                              {chain.name}
+                            </button>
+                            <button onClick={openAccountModal} type="button">
+                              {account.displayName}
+                              {account.displayBalance
+                                ? ` (${account.displayBalance})`
+                                : ''}
+                            </button>
                           </div>
                         );
-                      }
-                      if (chain.unsupported) {
-                        return (
-                          <button onClick={openChainModal} type="button">
-                            Wrong network
-                          </button>
-                        );
-                      }
-                      return (
-                        <div style={{ display: 'flex', gap: 12 }} className="border rounded-2xl p-4">
-                          <button
-                            onClick={openChainModal}
-                            style={{ display: 'flex', alignItems: 'center' }}
-                            type="button"
-                          >
-                            {chain.hasIcon && (
-                              <div
-                                style={{
-                                  background: chain.iconBackground,
-                                  width: 12,
-                                  height: 12,
-                                  borderRadius: 999,
-                                  overflow: 'hidden',
-                                  marginRight: 4,
-                                }}
-                              >
-                                {chain.iconUrl && (
-                                  <img
-                                    alt={chain.name ?? 'Chain icon'}
-                                    src={chain.iconUrl}
-                                    style={{ width: 12, height: 12 }}
-                                  />
-                                )}
-                              </div>
-                            )}
-                            {chain.name}
-                          </button>
-                          <button onClick={openAccountModal} type="button">
-                            {account.displayName}
-                            {account.displayBalance
-                              ? ` (${account.displayBalance})`
-                              : ''}
-                          </button>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                );
-              }}
-            </ConnectButton.Custom>
-          }
+                      })()}
+                    </div>
+                  );
+                }}
+              </ConnectButton.Custom>
+            }
+          </div>
         </div>
       </div>
     </div>
