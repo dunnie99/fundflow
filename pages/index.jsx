@@ -14,7 +14,8 @@ const Home = () => {
         />
         <script
           type="text/javascript"
-          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js" async 
+          ></script>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
