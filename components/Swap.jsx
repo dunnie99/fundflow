@@ -94,7 +94,7 @@ const Swap = () => {
       <div className='main_app_bg relative h-full '>
         <AppHeadNav app={app} />
         <div className="w-full md:max-w-fit px-4 sm:mx-auto bg-[#fefefe] p-4 relative top-20 left-0 right-0 rounded-[36px]">
-          <di className="my-3 block pl-2 text-2xl text-[#02051F]">Swap</di>
+          <div className="my-3 block pl-2 text-2xl text-[#02051F]">Swap</div>
           <div className="flex flex-col gap-3 w-full border-opacity-50 text-[#8287AE]">
             <div className="h-fit bg-[#CDCFDE] rounded-3xl rounded-box place-items-center p-5">
               <span className='text-lg'>You Pay</span>
@@ -143,7 +143,7 @@ const Swap = () => {
 
             <div
               onClick={swapFields}
-              className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[42%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
+              className="bg-base-100 rounded-lg w-fit p-2 mx-auto my-1 absolute top-[41%] bg-white left-0 right-0 z-10 hover:cursor-pointer hover:bg-base-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
                 <path fill-rule="evenodd" clipRule="evenodd" d="M19.1628 13.2372C19.079 13.1536 19.0125 13.0542 18.9672 12.9449C18.9218 12.8356 18.8984 12.7183 18.8984 12.6C18.8984 12.4816 18.9218 12.3644 18.9672 12.255C19.0125 12.1457 19.079 12.0464 19.1628 11.9628L24.5628 6.56276C24.6465 6.47909 24.7459 6.41271 24.8552 6.36742C24.9645 6.32214 25.0817 6.29883 25.2 6.29883C25.3184 6.29883 25.4356 6.32214 25.5449 6.36742C25.6542 6.41271 25.7536 6.47909 25.8372 6.56276C25.9209 6.64644 25.9873 6.74578 26.0326 6.85511C26.0779 6.96445 26.1012 7.08163 26.1012 7.19997C26.1012 7.3183 26.0779 7.43548 26.0326 7.54482C25.9873 7.65415 25.9209 7.75349 25.8372 7.83717L20.4372 13.2372C20.3536 13.321 20.2543 13.3875 20.145 13.4328C20.0356 13.4782 19.9184 13.5016 19.8 13.5016C19.6817 13.5016 19.5644 13.4782 19.4551 13.4328C19.3458 13.3875 19.2464 13.321 19.1628 13.2372Z" fill="#02051F" />

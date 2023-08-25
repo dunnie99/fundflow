@@ -124,6 +124,53 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "showBorrowedDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "tokenBorrowed",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "Amount", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "PaybackAmount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct FundFlowContract.BorrowedToken[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "showDepositDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "tokenDeposited",
+            "type": "address"
+          },
+          { "internalType": "uint256", "name": "Amount", "type": "uint256" }
+        ],
+        "internalType": "struct FundFlowContract.DepositedToken[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "address", "name": "_tokenTYPE", "type": "address" },
       { "internalType": "uint256", "name": "_amount", "type": "uint256" }

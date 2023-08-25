@@ -56,8 +56,8 @@ const Supply = () => {
           </div>
         </section>
       </div>
-      {open && <SupplyWithdraw />}
-      {openDeposit && <DepositAsset />}
+      {open && <SupplyWithdraw setOpen={setOpen} />}
+      {openDeposit && <DepositAsset setOpen={setOpenDeposit} />}
     </div>
   );
 };

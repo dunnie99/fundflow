@@ -15,7 +15,7 @@ import {
 import useFetchUserAccount from "../../../hooks/useFetchUserAccount";
 import ERC20 from "../../../constant/ERC20.json";
 
-export default function DepositAsset() {
+export default function DepositAsset({ setOpenDeposit }) {
   const [addr, setAddr] = useState("");
   const [amt, setAmt] = useState();
   const [usrAdr, setUsrAdr] = useState("");
@@ -30,6 +30,7 @@ export default function DepositAsset() {
     functionName: "deposit",
     args: [addr, amt],
   });
+
   const { config: approveToken } = usePrepareContractWrite({
     address: addr,
     abi: ERC20,
@@ -48,7 +49,8 @@ export default function DepositAsset() {
     hash: cwriteData?.hash,
     onSuccess(data) {
       // console.log('Success', data)
-      //   toast.success("Account created");
+      setOpenDeposit(false)
+      toast.success("Account created");
     },
   });
   const {
@@ -56,7 +58,7 @@ export default function DepositAsset() {
     isLoading: cwriteLoadingAppr,
     write: cwriteWriteAppr,
     isSuccess: successAppr,
-  } = useContractWrite(config);
+  } = useContractWrite(approveToken);
 
   const {
     data: dataAppr,
@@ -67,7 +69,8 @@ export default function DepositAsset() {
     onSuccess(data) {
       // console.log('Success', data)
       //   toast.success("Account created");
-      // cwriteWrite?.();
+      setOpenDeposit(false)
+      cwriteWrite?.();
     },
   });
 

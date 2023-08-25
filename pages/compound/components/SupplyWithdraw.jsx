@@ -6,13 +6,15 @@ import useDeposit from '../../../hooks/useDeposit';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import useFetchUserAccount from '../../../hooks/useFetchUserAccount';
 import { toast } from 'react-toastify';
+import { ethers } from 'ethers'
 
-export default function SupplyWithdraw() {
+export default function SupplyWithdraw({ setOpen }) {
 
   const fName = "deposit"
 
+
   const [addr, setAddr] = useState("");
-  const [amt, setAmt] = useState();
+  const [amt, setAmt] = useState("");
   const [usrAdr, setUsrAdr] = useState("");
   const [selected, setSelected] = useState("");
   const [openDrop, setOpenDrop] = useState(false)
@@ -27,11 +29,11 @@ export default function SupplyWithdraw() {
 
 
   const { config } = usePrepareContractWrite({
-    address: usrAdr,
+    address: readData,
     abi: childABI,
     functionName: "depositCompound",
     // args: [ CometAddress ],
-    args: [addr, amt]
+    args: [addr, amt !== "" ? ethers?.parseEther(amt) : ethers?.parseEther("0")]
   })
 
 
@@ -41,6 +43,8 @@ export default function SupplyWithdraw() {
     hash: cwriteData?.hash,
     onSuccess(data) {
       // console.log('Success', data)
+      setOpen(false)
+      setAmt("0")
       toast.success(`$${amt} has been added as liquidity`);
     },
 
@@ -49,11 +53,11 @@ export default function SupplyWithdraw() {
 
   // withdraw
   const { config: withdrawConfig } = usePrepareContractWrite({
-    address: usrAdr,
+    address: readData,
     abi: childABI,
     functionName: "withdrawCompound",
     // args: [ CometAddress ],
-    args: [addr, amt]
+    args: [addr, amt !== "" ? ethers?.parseEther(amt) : ethers?.parseEther("0")]
   })
 
 
@@ -63,6 +67,8 @@ export default function SupplyWithdraw() {
     hash: withdrawData?.hash,
     onSuccess(data) {
       // console.log('Success', data)
+      setOpen(false)
+      setAmt("0")
       toast.success(`$${amt} liquidity has been removed`);
     },
 
@@ -86,12 +92,20 @@ export default function SupplyWithdraw() {
 
   const handleSupply = (e) => {
     e.preventDefault()
-    cwriteWrite?.();
+    if (amt === "") {
+      toast.error("Amount must be greater than zero (0)")
+    } else {
+      cwriteWrite?.();
+    }
   }
 
   const handleWithdraw = (e) => {
     e.preventDefault()
-    withdrawWrite?.()
+    if (amt === "") {
+      toast.error("Amount must be greater than zero (0)")
+    } else {
+      withdrawWrite?.()
+    }
   }
 
   useEffect(() => {
@@ -137,7 +151,7 @@ export default function SupplyWithdraw() {
             <div className="pt-4 pb-4 border-t-[1px] border-b-[1px] border-[#ACAFC9]">
               <div className="w-[85%] mx-auto text-[#585E92] flex gap-2 items-center">
                 <p className="text-[24px] font-normal">$</p>
-                <input type="text" onChange={(e) => setAmt(e.target.value)} placeholder='0.00' className='text-[24px] font-normal border-l-0 outline-none w-full' />
+                <input type="text" value={amt} onChange={(e) => setAmt(e.target.value)} placeholder='0.00' className='text-[24px] font-normal border-l-0 outline-none w-full' />
               </div>
               <div className="w-[85%] mt-4 mx-auto">
 

@@ -93,7 +93,7 @@ export const AppHeadNav = ({ app }) => {
       data-te-navbar-ref>
       <div className="flex w-full justify-between items-center">
         <div className="flex">
-          <Link href="/" className="text-md sm:text-3xl geostar_font uppercase text-[#fefefe]">
+          <Link href="/" className="text-3xl geostar_font uppercase text-[#fefefe]">
             Fundflow
           </Link>
 
