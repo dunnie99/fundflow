@@ -112,7 +112,7 @@ export const AppHeadNav = ({ app }) => {
                 <Link
                   className="md:px-2 "
                   aria-current="page"
-                  href="/markets"
+                  href="/compound"
                   data-te-nav-link-ref
                 >Markets</Link >
               </div>

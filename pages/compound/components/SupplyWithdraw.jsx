@@ -92,7 +92,7 @@ export default function SupplyWithdraw({ setOpen }) {
 
   const handleSupply = (e) => {
     e.preventDefault()
-    if (amt === "") {
+    if (amt === "" || amt === "0") {
       toast.error("Amount must be greater than zero (0)")
     } else {
       cwriteWrite?.();
@@ -101,7 +101,7 @@ export default function SupplyWithdraw({ setOpen }) {
 
   const handleWithdraw = (e) => {
     e.preventDefault()
-    if (amt === "") {
+    if (amt === "" || amt === "0") {
       toast.error("Amount must be greater than zero (0)")
     } else {
       withdrawWrite?.()
