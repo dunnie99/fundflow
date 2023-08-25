@@ -1,10 +1,91 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
-import { useContext } from "react"
+import { useContext, useEffect , useState} from "react"
 import { GlobalContext } from "../context/GlobalContext"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import factoryABI from "../constant/factoryABI.json" 
+import {Factory, CometAddress} from "../constant/address"
+import {toast} from "react-toastify"
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 
-export const AppHeadNav = () => {
+export const AppHeadNav = ({ app }) => {
   const { state, dispatch } = useContext(GlobalContext)
+  const [currentApp, setCurrentApp] = useState(app)
+  const [detail, setDetail] =useState(false);
+  const {address} = useAccount();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const changeParams = (e) => {
+    // now you got a read/write object
+    const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
+
+    // update as necessary
+    const value = event.target.value.trim();
+
+    if (!value) {
+      current.delete("source");
+    } else {
+      current.set("source", event.target.value);
+    }
+
+    // cast to string
+    const search = current.toString();
+    // or const query = `${'?'.repeat(search.length && 1)}${search}`;
+    const query = search ? `?${search}` : "";
+
+    router.push(`${pathname}${query}`);
+  };
+
+  const { data:readData, isError:readError, isLoading:readLoading, isSuccess:readSuccess } = useContractRead({
+    address: Factory,
+    abi: factoryABI,
+    functionName: "obtainAccountStatus",
+    args: [address],
+  });
+
+ 
+
+
+  const { config } = usePrepareContractWrite({
+    address: Factory,
+    abi: factoryABI,
+    functionName: 'CreateAccount',
+    args: [ CometAddress ],
+  })
+
+
+  const {data:cwriteData, isLoading:cwriteLoading, write:cwriteWrite} = useContractWrite(config)
+
+  const {data, isError, isLoading} = useWaitForTransaction({
+    hash: cwriteData?.hash,
+    onSuccess(data) {
+      // console.log('Success', data)
+      toast.success("Account created");
+    },
+
+  })
+  
+
+
+  const handlesubmit =(e)=>{
+    e.preventDefault()
+
+    cwriteWrite?.()
+  }
+
+  useEffect(()=>{
+    if(isError){
+      toast.error("Error Occur, try again")
+    }
+    if (readSuccess) {
+          setDetail(readData);
+        }
+  }, [isError, readData, readSuccess])
+   // useEffect(() => {
+  //  
+  // }, [isSuccess, data]);
 
   return (
     <nav
@@ -41,7 +122,7 @@ export const AppHeadNav = () => {
                 data-te-nav-item-ref>
                 <Link
                   className="p-0 transition duration-200 hover:ease-in-out motion-reduce:transition-none md:px-2"
-                  href="/swap"
+                  href="/app?source=aave"
                   data-te-nav-link-ref
                 >Swap</Link>
               </div>
@@ -72,13 +153,17 @@ export const AppHeadNav = () => {
           </span>
         </button>
 
-        <div className="flex bg- items-center text-black gap-5">
-          <select data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-fit">
-            <option value="1">Aave</option>
-            <option value="2">Uniswap</option>
-            <option value="3">Baseswap</option>
+        <div className="flex bg- items-center text-black gap-5 hidden sm:flex">
+          <select value={app} onChange={(e) => { setCurrentApp(e.target.value); changeParams(e) }} data-te-select-init className="rounded-xl bg-transparent border-l border-r focus:border-red-300 py-1 h-[40px] px-3 w-fit">
+            <option value="aave" >Aave</option>
+            <option value="uniswap">Uniswap</option>
+            <option value="baseswap">Baseswap</option>
           </select>
-
+          {detail === false &&
+        <button onClick={handlesubmit} className="bg-[#02051F] text-[#CDCFDE] text-[16px] font-normal py-[16px] px-[10px] rounded-2xl">
+          {isLoading || cwriteLoading ? 'Creating ...' :"Create Account"}
+        </button>
+        }
 
           <ConnectButton.Custom>
             {({
@@ -171,7 +256,7 @@ export const AppHeadNav = () => {
                           )}
                           {chain.name}
                         </button>
-                        <button onClick={openAccountModal} type="button">
+                        <button onClick={openAccountModal} type="button" className="">
                           {account.displayName}
                           {account.displayBalance
                             ? ` (${account.displayBalance})`

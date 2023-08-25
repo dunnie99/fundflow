@@ -1,6 +1,5 @@
 /** @format */
 
-// import {arrow} from "../../../assets/arrow"
 
 import Image from "next/image";
 import SingleBorrow from "./SingleBorrow";
