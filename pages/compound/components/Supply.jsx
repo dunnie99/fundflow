@@ -17,6 +17,7 @@ const Supply = () => {
   const [userAddr, setUserAddr] = useState("")
 
 const {readData} = useFetchUserAccount();
+  console.log("Address:",readData);
   const { data, isError, isLoading, isSuccess } = useContractRead({
     address: userAddr,
     abi: childABI,
@@ -53,6 +54,8 @@ const {readData} = useFetchUserAccount();
             <Image src={arrow} alt="supply arrow" width={20} height={20} />
           </button>
         </div>
+        {data?.length === 0 || data?.length === undefined ? <h2 className="text-center text-[20px] text-[#CDCFDE] leading-6 mt-6">You do not have an Active Supplied Data</h2>:
+        
         <section className="relative w-[90%] mx-auto">
           <div className="text-[20px] grid grid-cols-4  justify-between font-normal mono text-[#CDCFDE] leading-6 mt-6 mb-4  ">
             <h2 className="">Asset</h2>
@@ -71,6 +74,7 @@ const {readData} = useFetchUserAccount();
           }
           </div>
         </section>
+}
       </div>
       {open && <SupplyWithdraw setOpen={setOpen} />}
       {openDeposit && <DepositAsset setOpen={setOpenDeposit} />}
