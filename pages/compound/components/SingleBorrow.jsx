@@ -17,10 +17,10 @@ export default function SingleBorrow({ tokenBorrowed, Amount, PaybackAmount, ind
 
           <div className=" flex items-center gap-1">
             <span className='bg-[#9B9B9B] w-[36px] h-[36px] rounded-full'></span>
-            <p className="text-[#FEFEFE]">{data}</p>
+            <p className="text-[#FEFEFE] w-[80%]">{data}</p>
           </div>
-          <p className="text-[#56aafe] text-center">{Amount}</p>
-          <p className="text-[#56aafe] text-center">{PaybackAmount}</p>
+          <p className="text-[#56aafe] text-center">{String(Amount)/1e18}</p>
+          <p className="text-[#56aafe] text-center">{String(PaybackAmount)/1e18}</p>
           <p className="text-[#56aafe]  text-right" >3.65%</p>
         </div>
       </section>

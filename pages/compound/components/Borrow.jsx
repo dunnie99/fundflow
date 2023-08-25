@@ -23,7 +23,7 @@ const Borrow = () => {
   useEffect(() => {
     setUserAddr(readData)
   }, [])
-
+console.log('ddd',data);
   const [open, setOpen] = useState(false);
   return (
     <main className="">
