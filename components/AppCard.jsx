@@ -11,9 +11,9 @@ const AppCard = () => {
           <div key={index} className="app_card_bg p-4 text-center rounded-[36px] max-w-[400px]">
             <h3 className='text-xl sm:text-2xl block text-center'>{card?.name}</h3>
             <p className="text-base grotesk font-normal leading-[25.5px] tracking-[0.085px] px-6 mt-4">{card.content}</p>
-            <div className='flex mt-4 justify-between ml-2'>
+            <div className='sm:flex mt-4 justify-between ml-2'>
               {card?.innerCard.map((innercard, index) => (
-                <div key={index} className="grid w-[260px] text-center h-[160px] w-fit text-center bg-[url('../assets/border_app.svg')] pt-5 pb-12 px-5 bg-no-repeat bg-fill tracking-normal">
+                <div key={index} className="grid grow-1 w-[260px] mx-auto sm:mx-0 text-center h-[160px] w-fit text-center bg-[url('../assets/border_app.svg')] pt-5 pb-12 px-5 bg-no-repeat bg-fill tracking-normal">
                   <span className='grotesk'>{innercard?.name}</span>
                   <span className="mt- block">{innercard?.value}</span>
                 </div>

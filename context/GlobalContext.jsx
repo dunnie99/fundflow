@@ -3,7 +3,7 @@ export const GlobalContext = createContext();
 
 const initialState = {
   address: null,
-  connected: null,
+  connected: false,
   balanceETH: "",
 };
 
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
       }
       return {
         ...state,
-        token: localStorage.getItem("connected"),
+        connected: localStorage.getItem("connected"),
       };
     default:
       return state;

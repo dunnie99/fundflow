@@ -11,6 +11,10 @@ import bitgo from "./bitgo.svg";
 import avalanche from "./avalanche.svg";
 import anchorage from "./anchorage.svg";
 import coinbase from "./coinbase.svg";
+import tether from "./tether.svg";
+
+import arrow from './arrow.svg'
+import down from './down.svg'
 
 export {
   hero,
@@ -25,4 +29,7 @@ export {
   avalanche,
   anchorage,
   coinbase,
+  tether,
+  arrow,
+  down
 };
