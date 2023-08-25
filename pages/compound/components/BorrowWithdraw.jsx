@@ -6,17 +6,21 @@ import useDeposit from '../../../hooks/useDeposit';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import useFetchUserAccount from '../../../hooks/useFetchUserAccount';
 import { toast } from 'react-toastify';
+// import { ethers } from 'ethers';
+import * as ethers from 'ethers';
 
 export default function BorrowWithdraw() {
   
   const [addr, setAddr]=useState("");
-  const [amt, setAmt]=useState();
+  const [amt, setAmt]=useState("");
   const [usrAdr, setUsrAdr] = useState("");
   const [selected, setSelected] = useState(""); 
   const [openDrop, setOpenDrop] = useState(false)
  
 
 const {readData} = useFetchUserAccount();
+
+console.log(readData);
 
 
   
@@ -27,9 +31,9 @@ const {readData} = useFetchUserAccount();
   const { config } = usePrepareContractWrite({
     address: usrAdr,
     abi: childABI,
-    functionName: "depositCompound",
+    functionName: "repayLoan",
     // args: [ CometAddress ],
-    args: [addr, amt]
+    args: [addr, ethers?.utils?.parseEther(`${amt}`)]
   })
   
  
@@ -46,25 +50,26 @@ const {readData} = useFetchUserAccount();
 
 
   // borrow
-  const { config:withdrawConfig } = usePrepareContractWrite({
+  const { config:borrowConfig } = usePrepareContractWrite({
     address: usrAdr,
     abi: childABI,
     functionName: "borrow",
-    // args: [ CometAddress ],
-    args: [addr, amt]
+    args: [addr, ethers.utils.parseEther("100")]
   })
   
 
-  const {data:withdrawData, isLoading:withdrawLoading, write:withdrawWrite, isSuccess:withdrawSuccess} = useContractWrite(withdrawConfig)
+  const {data:borrowData, isLoading:borrowLoading, write:borrowWrite, isSuccess:borrowSuccess} = useContractWrite(borrowConfig)
 
-  const {data:withdrawWaitData, isError:withDrawWaitError, isLoading:withdrawWaitLoading, } = useWaitForTransaction({
-    hash: withdrawData?.hash,
+
+  const {data:borrowWaitData, isError:borrowWaitError, isLoading:borrowWaitLoading, } = useWaitForTransaction({
+    hash: borrowData?.hash,
     onSuccess(data) {
       // console.log('Success', data)
       toast.success(`$${amt} was borrowed `);
     },
 
   })
+
 
 	// claim faucet: 0x54fcBea987d18E027a827eE25e1943Cf0874Eba8	
 const tokens = [
@@ -82,6 +87,7 @@ const tokens = [
   }
 ];
 
+
 const handlePayback = (e) =>{
   e.preventDefault()
   console.log("het");
@@ -90,7 +96,7 @@ const handlePayback = (e) =>{
 
 const handleBorrow = (e) =>{
   e.preventDefault()
-  withdrawWrite?.()
+  borrowWrite?.()
 }
 
 useEffect(()=>{
@@ -100,11 +106,13 @@ useEffect(()=>{
   if(isError){
     toast.error("Error occur while depositing")
   }
-  if(withDrawWaitError){
+  if(borrowWaitError){
     toast.error("Error occur while depositing")
   }
+  setAmt(0)
+  console.log(amt);
   setUsrAdr(readData);
-},[addr, readData,  isError, withDrawWaitError])
+},[addr, readData,  isError, borrowWaitError])
 
   return (
     <main className='absolute w-[100%] top-0 -ml-20'>
@@ -147,8 +155,8 @@ useEffect(()=>{
                 <p className="font-normal text-[17px] text-[#02051f]">Available balance: <span className='text-[24px] font-secondary font-normal text-[#02051f]'>$10.00</span></p>
                 </div> */}
                 <div className="w-[80%] mx-auto flex gap-6 pt-6 pb-6">
-                  <button onClick={ handleBorrow} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{isLoading || cwriteLoading?"Borrow ...": "Borrow"}</button>
-                  <button onClick={handlePayback} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{withdrawWaitLoading || withdrawLoading?"Payback ..." : "Payback"}</button>
+                  <button onClick={ handleBorrow} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{borrowWaitLoading || borrowLoading?"Borrow ...": "Borrow"}</button>
+                  <button onClick={handlePayback} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{  isLoading || cwriteLoading?"Payback ..." : "Payback"}</button>
                 </div>
             </div>
 

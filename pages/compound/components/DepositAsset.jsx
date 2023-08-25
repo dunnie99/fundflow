@@ -30,6 +30,7 @@ export default function DepositAsset() {
     functionName: "deposit",
     args: [addr, amt],
   });
+
   const { config: approveToken } = usePrepareContractWrite({
     address: addr,
     abi: ERC20,
@@ -48,7 +49,7 @@ export default function DepositAsset() {
     hash: cwriteData?.hash,
     onSuccess(data) {
       // console.log('Success', data)
-      //   toast.success("Account created");
+        toast.success("Account created");
     },
   });
   const {
@@ -56,7 +57,7 @@ export default function DepositAsset() {
     isLoading: cwriteLoadingAppr,
     write: cwriteWriteAppr,
     isSuccess: successAppr,
-  } = useContractWrite(config);
+  } = useContractWrite(approveToken);
 
   const {
     data: dataAppr,
@@ -67,7 +68,7 @@ export default function DepositAsset() {
     onSuccess(data) {
       // console.log('Success', data)
       //   toast.success("Account created");
-      // cwriteWrite?.();
+      cwriteWrite?.();
     },
   });
 
