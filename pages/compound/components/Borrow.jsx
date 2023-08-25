@@ -16,7 +16,7 @@ const Borrow = () => {
   const { data, isError, isLoading, isSuccess } = useContractRead({
     address: userAddr,
     abi: childABI,
-    functionName: "myBorrowedBalance",
+    functionName: "showBorrowedDetails",
     // args: [userAddr],
   });
   console.log("br", data);
@@ -47,23 +47,10 @@ const Borrow = () => {
               <h2 className="text-right">P2P APY</h2>
             </div>
             <div className="h-[340px] overflow-y-scroll scrollbar-hide  pb-[40px]">
+              {data.map((detail, index)=>(
+
             <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
-            <SingleBorrow />
+              ))}
             </div>
           </section>
         </div>
