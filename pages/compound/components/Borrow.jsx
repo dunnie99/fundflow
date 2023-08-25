@@ -3,11 +3,27 @@
 
 import Image from "next/image";
 import SingleBorrow from "./SingleBorrow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BorrowWithdraw from "./BorrowWithdraw";
 import { arrow } from "../../../assets";
+import useFetchUserAccount from "../../../hooks/useFetchUserAccount";
+import { useContractRead } from "wagmi";
+import childABI from '../../../constant/childABI.json'
 
 const Borrow = () => {
+  const [userAddr, setUserAddr] = useState("")
+    const {readData} = useFetchUserAccount();
+  const { data, isError, isLoading, isSuccess } = useContractRead({
+    address: userAddr,
+    abi: childABI,
+    functionName: "myBorrowedBalance",
+    // args: [userAddr],
+  });
+  console.log("br", data);
+  useEffect(()=>{
+    setUserAddr(readData)
+  },[])
+
   const [open, setOpen] = useState(false);
   return (
     <main className="">

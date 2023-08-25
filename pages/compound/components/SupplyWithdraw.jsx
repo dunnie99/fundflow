@@ -6,13 +6,14 @@ import useDeposit from '../../../hooks/useDeposit';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import useFetchUserAccount from '../../../hooks/useFetchUserAccount';
 import { toast } from 'react-toastify';
+import {ethers} from 'ethers'
 
 export default function SupplyWithdraw() {
 
   const fName ="deposit"
   
   const [addr, setAddr]=useState("");
-  const [amt, setAmt]=useState();
+  const [amt, setAmt]=useState(0);
   const [usrAdr, setUsrAdr] = useState("");
   const [selected, setSelected] = useState(""); 
   const [openDrop, setOpenDrop] = useState(false)
@@ -31,7 +32,7 @@ const {readData} = useFetchUserAccount();
     abi: childABI,
     functionName: "depositCompound",
     // args: [ CometAddress ],
-    args: [addr, amt]
+    args: [addr, ethers?.parseEther(`${amt}`)]
   })
   
  
@@ -142,7 +143,7 @@ useEffect(()=>{
                   </div>
                   <div className="w-[85%] mt-4 mx-auto">
 
-                  <p className="font-normal text-[17px] text-[#02051f]">supply</p>
+                  <p className="font-normal text-[17px] text-[#02051f]">supply/withdraw</p>
                   </div>
                 </div>
                 {/* <div className="pt-4 pb-4 border-b-[1px] border-[#ACAFC9]">
