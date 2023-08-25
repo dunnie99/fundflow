@@ -157,7 +157,7 @@ export default function BorrowWithdraw({ setOpen }) {
                 <p className="font-normal text-[17px] text-[#02051f]">Available balance: <span className='text-[24px] font-secondary font-normal text-[#02051f]'>$10.00</span></p>
                 </div> */}
             <div className="w-[80%] mx-auto flex gap-6 pt-6 pb-6">
-              <button onClick={(e) => { handleBorrow(e); console.log(ethers?.parseEther(amt)) }} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{borrowWaitLoading || borrowLoading ? "Borrow ..." : "Borrow"}</button>
+              <button onClick={(e) => { handleBorrow(e) }} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{borrowWaitLoading || borrowLoading ? "Borrow ..." : "Borrow"}</button>
               <button onClick={handlePayback} className='w-[182px] h-[52px] text-[24px] rounded-2xl bg-[#ACAFC9] font-normal font-secondary leading-9 text-[#040C4D]'>{isLoading || cwriteLoading ? "Payback ..." : "Payback"}</button>
             </div>
           </div>
