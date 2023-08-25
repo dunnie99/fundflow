@@ -119,7 +119,7 @@ console.log(readData);
     setUsrAdr(readData);
   }, [addr, readData, isError, borrowWaitError])
 
-  console.log("factory addr", usrAdr)
+  
 
   return (
     <main className='absolute w-[100%] top-0 -ml-20'>
