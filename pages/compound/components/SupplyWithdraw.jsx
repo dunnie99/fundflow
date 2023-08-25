@@ -142,7 +142,7 @@ useEffect(()=>{
                   </div>
                   <div className="w-[85%] mt-4 mx-auto">
 
-                  <p className="font-normal text-[17px] text-[#02051f]">supply</p>
+                  <p className="font-normal text-[17px] text-[#02051f]">supply/withdraw</p>
                   </div>
                 </div>
                 {/* <div className="pt-4 pb-4 border-b-[1px] border-[#ACAFC9]">
