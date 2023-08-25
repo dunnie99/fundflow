@@ -17,9 +17,9 @@
     "react-icons": "^4.10.1",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",
+    "tw-elements": "^1.0.0-beta3",
     "tailwind-scrollbar": "^3.0.5",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "tw-elements": "^1.0.0-beta3",
     "viem": "~1.1.8",
     "wagmi": "~1.3.2"
   },

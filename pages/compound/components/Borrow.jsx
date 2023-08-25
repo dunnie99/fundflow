@@ -16,7 +16,7 @@ const Borrow = () => {
   const { data, isError, isLoading, isSuccess } = useContractRead({
     address: userAddr,
     abi: childABI,
-    functionName: "myBorrowedBalance",
+    functionName: "showBorrowedDetails",
     // args: [userAddr],
   });
   console.log("br", data);
@@ -39,33 +39,24 @@ const Borrow = () => {
               <Image src={arrow} alt="" width={24} height={24} />
             </button>
           </div>
-          <section className="relative w-[90%] mx-auto">
-            <div className="text-[20px] grid grid-cols-4  justify-between font-normal mono text-[#CDCFDE] leading-6 mt-6 mb-4">
-              <h2 className="">Asset</h2>
-              <h2 className="text-center">Address</h2>
-              <h2 className="text-center">Pool APY</h2>
-              <h2 className="text-right">P2P APY</h2>
-            </div>
-            <div className="h-[340px] overflow-y-scroll scrollbar-hide  pb-[40px]">
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-              <SingleBorrow />
-            </div>
-          </section>
+          {
+            data?.length === 0 || data?.length === undefined ?
+              <h2 className="text-center text-[20px] font-normal mono text-[#CDCFDE] leading-6 mt-6 mb-4">You do not have an Active Borrowed Data</h2>
+              :
+              <section className="relative w-[90%] mx-auto">
+                <div className="text-[20px] grid grid-cols-4  justify-between font-normal mono text-[#CDCFDE] leading-6 mt-6 mb-4">
+                  <h2 className="">Asset</h2>
+                  <h2 className="text-center">Amount</h2>
+                  <h2 className="text-center">Payback Amount</h2>
+                  <h2 className="text-right">P2P APY</h2>
+                </div>
+                <div className="h-[340px] overflow-y-scroll scrollbar-hide  pb-[40px]">
+                  {/* {data?.map((detail, index) => (
+                    <SingleBorrow index={index} tokenBorrowed={detail.tokenBorrowed} Amount={detail.Amount} PaybackAmount={detail.PaybackAmount} useContractRead={useContractRead} />
+                  ))} */}
+                </div>
+              </section>
+          }
         </div>
         {open && <BorrowWithdraw setOpen={setOpen} />}
       </div>
