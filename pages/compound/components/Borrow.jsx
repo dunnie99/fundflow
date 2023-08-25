@@ -52,7 +52,7 @@ const Borrow = () => {
                 </div>
                 <div className="h-[340px] overflow-y-scroll scrollbar-hide  pb-[40px]">
                   {data?.map((detail, index) => (
-                    <SingleBorrow index={index} tokenBorrowed={detail.tokenBorrowed} Amount={detail.Amount} PaybackAmount={detail.PaybackAmount} useContractRead={useContractRead} />
+                    <SingleBorrow key={index} index={index} tokenBorrowed={detail.tokenBorrowed} Amount={detail.Amount} PaybackAmount={detail.PaybackAmount} useContractRead={useContractRead} />
                   ))}
                 </div>
               </section>

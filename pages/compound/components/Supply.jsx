@@ -68,7 +68,7 @@ const {readData} = useFetchUserAccount();
           {
             data?.map((detail, index)=>(
 
-              <SingleSupply index={index} address={detail.tokenDeposited
+              <SingleSupply key={index} index={index} address={detail.tokenDeposited
               } Amount={String(detail.Amount)/1e18}/>
             ))
           }
